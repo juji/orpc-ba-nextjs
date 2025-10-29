@@ -8,11 +8,17 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "postinstall": "lefthook install; lucidlines init",
-    "lucidlines": "lucidlines"
+    "lucid": "lucidlines",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "postinstall": "lefthook install"
   },
   "dependencies": {
+    "@types/pg": "^8.15.6",
+    "better-auth": "^1.3.34",
+    "drizzle-orm": "^0.44.7",
     "next": "16.0.1",
+    "postgres": "^3.4.7",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -23,6 +29,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "drizzle-kit": "^0.31.6",
     "lefthook": "^2.0.2",
     "lucidlines": "^1.1.18",
     "tailwindcss": "^4",
