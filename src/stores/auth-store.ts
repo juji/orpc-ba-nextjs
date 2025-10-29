@@ -15,6 +15,7 @@ interface SessionData {
 interface AuthState {
   session: SessionData | null;
   loading: boolean;
+  initialized: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   getSession: () => Promise<void>;
@@ -23,6 +24,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   session: null,
   loading: true,
+  initialized: false,
 
   signIn: async (email: string, password: string) => {
     try {
@@ -54,10 +56,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   getSession: async () => {
     try {
       const session = await authClient.getSession();
-      set({ session: session.data, loading: false });
+      set({ session: session.data, loading: false, initialized: true });
     } catch (error) {
       console.error("Failed to get session:", error);
-      set({ loading: false });
+      set({ loading: false, initialized: true });
     }
   },
 }));
