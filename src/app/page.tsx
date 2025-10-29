@@ -1,5 +1,6 @@
 import Auth from "@/components/auth";
-// import Register from "@/components/register";
+import ORPCTest from "@/components/orpc-test";
+import Register from "@/components/register";
 import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
               <Auth />
               {/* <Register /> */}
             </div>
+            <ORPCTest />
           </div>
         </div>
       </main>
