@@ -1,5 +1,5 @@
 import Auth from "@/components/auth";
-import ORPCTest from "@/components/orpc-test";
+// import ORPCTest from "@/components/orpc-test";
 import ShuffleEmail from "@/components/shuffle-email";
 // import Register from "@/components/register";
 
@@ -23,7 +23,7 @@ export default function Home() {
         <div className="flex justify-center mb-10">
           <ShuffleEmail />
         </div>
-        <ORPCTest />
+        {/* <ORPCTest /> */}
       </div>
     </div>
   );
