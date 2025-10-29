@@ -40,6 +40,10 @@ export default function ShuffleEmail() {
         {loading ? "Shuffling..." : "Shuffle Email"}
       </button>
 
+      <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-2 text-center">
+        POST /rpc/shuffle-email
+      </p>
+
       {shuffledResult && (
         <div className="mt-4 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-md">
           <pre className="text-sm text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono">
