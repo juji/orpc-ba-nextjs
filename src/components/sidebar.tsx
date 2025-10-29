@@ -100,7 +100,9 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-4 border-b border-border">
-            <h2 className="text-lg font-semibold">ORPC App</h2>
+            <h2 className="text-lg font-semibold text-right lg:text-left">
+              ORPC App
+            </h2>
           </div>
 
           {/* Navigation */}
