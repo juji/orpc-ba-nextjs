@@ -90,6 +90,7 @@ export default function Auth() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled
               required
             />
           </div>
@@ -101,6 +102,7 @@ export default function Auth() {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled
               required
             />
           </div>
