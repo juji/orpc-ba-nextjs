@@ -20,7 +20,7 @@ export default function Home() {
                 Better Auth and Drizzle ORM.
               </p>
             </div>
-            <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
+            <div className="flex flex-col lg:flex-row gap-8 items-center justify-center mb-10">
               <Auth />
               {/* <Register /> */}
             </div>
