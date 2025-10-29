@@ -1,10 +1,20 @@
 "use client";
 
-import { Database, Home, Settings, Shield, User, X } from "lucide-react";
+import {
+  Database,
+  Home,
+  LogIn,
+  LogOut,
+  Settings,
+  Shield,
+  User,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/ui/shadcn-io/theme-switcher";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface SidebarProps {
   className?: string;
@@ -45,6 +55,15 @@ const navigationItems = [
 
 export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { session, signOut } = useAuthStore();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (_error) {
+      // Error is already logged in the store
+    }
+  };
 
   return (
     <>
@@ -126,8 +145,36 @@ export function Sidebar({ className }: SidebarProps) {
             })}
           </nav>
 
-          {/* Footer with theme switcher */}
-          <div className="border-t border-border p-4">
+          {/* Footer with auth indicator and theme switcher */}
+          <div className="border-t border-border p-4 space-y-3">
+            {/* Auth indicator */}
+            <div className="flex items-center justify-center">
+              {session ? (
+                <Button
+                  onClick={handleSignOut}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    window.location.href = "/";
+                  }}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Sign In
+                </Button>
+              )}
+            </div>
+
+            {/* Theme switcher */}
             <div className="flex items-center justify-center">
               <ThemeSwitcher />
             </div>
