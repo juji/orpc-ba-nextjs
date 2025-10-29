@@ -1,0 +1,29 @@
+{
+	// LucidLines configuration file
+	// This file configures the LucidLines terminal streaming server
+	// See https://github.com/juji/lucidlines for documentation
+
+	// Port to run the server on (default: 8080)
+	port: 8080,
+
+	// Commands to run when the server starts
+	commands: [
+		{
+			// Display name for this command (shown in UI)
+			name: "DB",
+
+			// Shell command to execute
+			command: "docker-compose up",
+		},
+		{
+			// Display name for this command (shown in UI)
+			name: "NEXTJS",
+
+			// Shell command to execute
+			command: "pnpm dev",
+		},
+	],
+
+	// Enable development mode (default: false)
+	dev: false,
+}

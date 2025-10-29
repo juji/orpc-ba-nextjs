@@ -2,17 +2,46 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js (latest LTS recommended)
+- pnpm
+- Docker and Docker Compose
+
+### Database Setup
+
+1. Start the PostgreSQL database:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker-compose up -d
 ```
+
+2. Copy the environment variables:
+```bash
+cp .env.example .env.local
+```
+
+3. Update `.env.local` with your actual values if needed.
+
+### Installation
+
+1. Install dependencies:
+```bash
+pnpm install
+```
+
+2. Start the development server:
+```bash
+pnpm dev
+```
+
+### Available Scripts
+
+- `pnpm dev` - Start Next.js development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run Biome linter
+- `pnpm format` - Format code with Biome
+- `pnpm lucid` - Run Lucidlines development tool
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
