@@ -62,7 +62,11 @@ export default function Auth() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={handleSignOut} variant="outline" className="w-full">
+          <Button
+            onClick={handleSignOut}
+            variant="outline"
+            className="w-full cursor-pointer"
+          >
             Sign Out
           </Button>
         </CardContent>
@@ -100,7 +104,7 @@ export default function Auth() {
               required
             />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full cursor-pointer">
             Sign In
           </Button>
         </form>

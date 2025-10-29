@@ -154,7 +154,7 @@ export function Sidebar({ className }: SidebarProps) {
                   onClick={handleSignOut}
                   variant="outline"
                   size="sm"
-                  className="w-full"
+                  className="w-full cursor-pointer"
                 >
                   <LogOut className="h-4 w-4 mr-2" />
                   Sign Out
@@ -166,7 +166,7 @@ export function Sidebar({ className }: SidebarProps) {
                   }}
                   variant="outline"
                   size="sm"
-                  className="w-full"
+                  className="w-full cursor-pointer"
                 >
                   <LogIn className="h-4 w-4 mr-2" />
                   Sign In
