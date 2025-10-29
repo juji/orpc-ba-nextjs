@@ -28,62 +28,44 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    try {
-      const storedTheme = localStorage.getItem(storageKey) as Theme;
-      if (storedTheme) {
-        setTheme(storedTheme);
+  const [theme, setTheme] = useState<Theme>(() => {
+    // Initialize theme from localStorage if available, otherwise use default
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem(storageKey) as Theme;
+        return stored || defaultTheme;
+      } catch {
+        return defaultTheme;
       }
-    } catch (error) {
-      // localStorage might not be available in some environments
-      console.warn("Failed to access localStorage:", error);
     }
-  }, [storageKey]);
+    return defaultTheme;
+  });
 
   useEffect(() => {
-    if (!mounted) return;
+    const root = window.document.documentElement;
 
-    try {
-      const root = window.document.documentElement;
+    // Remove existing theme classes
+    root.classList.remove("light", "dark");
 
-      root.classList.remove("light", "dark");
-
-      if (theme === "system") {
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
-
-        root.classList.add(systemTheme);
-        return;
-      }
-
+    // Apply the current theme
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      root.classList.add(systemTheme);
+    } else {
       root.classList.add(theme);
-    } catch (error) {
-      // window might not be available during SSR
-      console.warn("Failed to access window:", error);
     }
-  }, [theme, mounted]);
+  }, [theme]);
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      try {
-        localStorage.setItem(storageKey, theme);
-      } catch (error) {
-        console.warn("Failed to save theme to localStorage:", error);
-      }
+      localStorage.setItem(storageKey, theme);
       setTheme(theme);
     },
   };
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
