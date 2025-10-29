@@ -67,7 +67,8 @@ export default function BasicPage() {
             Basic Math Operations
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Test basic addition and multiplication operations.
+            Test basic addition and multiplication operations. Check the network
+            tab in the developer panel to see the requests.
           </p>
         </div>
 
