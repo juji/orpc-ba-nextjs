@@ -1,6 +1,6 @@
 "use client";
 
-import { Database, Home, Menu, Settings, Shield, User, X } from "lucide-react";
+import { Database, Home, Settings, Shield, User, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/ui/shadcn-io/theme-switcher";
@@ -45,7 +45,6 @@ const navigationItems = [
 
 export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <>
@@ -57,7 +56,15 @@ export function Sidebar({ className }: SidebarProps) {
           onClick={() => setIsOpen(!isOpen)}
           className="bg-background/80 backdrop-blur-sm"
         >
-          {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          {isOpen ? (
+            <X className="h-4 w-4" />
+          ) : (
+            <div className="flex flex-col gap-1">
+              <span className="block w-4 h-0.5 bg-current"></span>
+              <span className="block w-4 h-0.5 bg-current"></span>
+              <span className="block w-4 h-0.5 bg-current"></span>
+            </div>
+          )}
         </Button>
       </div>
 
@@ -83,8 +90,8 @@ export function Sidebar({ className }: SidebarProps) {
           // Mobile styles
           "lg:translate-x-0 lg:static lg:z-auto",
           isOpen ? "translate-x-0" : "-translate-x-full",
-          // Desktop collapsible
-          isCollapsed ? "lg:w-16" : "lg:w-64",
+          // Desktop width (always full)
+          "lg:w-64",
           // Mobile width
           "w-64",
           className,
@@ -93,18 +100,7 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-4 border-b border-border">
-            {!isCollapsed && (
-              <h2 className="text-lg font-semibold">ORPC App</h2>
-            )}
-            {/* Desktop collapse button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              className="hidden lg:flex h-8 w-8"
-            >
-              <Menu className="h-4 w-4" />
-            </Button>
+            <h2 className="text-lg font-semibold">ORPC App</h2>
           </div>
 
           {/* Navigation */}
@@ -120,14 +116,11 @@ export function Sidebar({ className }: SidebarProps) {
                     item.current
                       ? "bg-accent text-accent-foreground"
                       : "text-muted-foreground",
-                    isCollapsed && "lg:justify-center lg:px-2",
                   )}
                   onClick={() => setIsOpen(false)} // Close mobile menu on navigation
                 >
                   <Icon className="h-4 w-4 shrink-0" />
-                  {!isCollapsed && (
-                    <span className="truncate">{item.name}</span>
-                  )}
+                  <span className="truncate">{item.name}</span>
                 </a>
               );
             })}
