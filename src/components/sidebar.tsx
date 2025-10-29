@@ -41,30 +41,6 @@ const navigationItems = [
     icon: MessageCircle,
     current: false,
   },
-  {
-    name: "Profile",
-    href: "/profile",
-    icon: User,
-    current: false,
-  },
-  {
-    name: "Database",
-    href: "/database",
-    icon: Database,
-    current: false,
-  },
-  {
-    name: "Security",
-    href: "/security",
-    icon: Shield,
-    current: false,
-  },
-  {
-    name: "Settings",
-    href: "/settings",
-    icon: Settings,
-    current: false,
-  },
 ];
 
 export function Sidebar({ className }: SidebarProps) {
