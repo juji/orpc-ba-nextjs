@@ -7,5 +7,5 @@ export const orpcContract = {
   hello,
   add,
   multiply,
-  "shuffle-email": shuffleEmail,
+  shuffleEmail,
 };

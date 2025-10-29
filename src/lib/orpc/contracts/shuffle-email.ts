@@ -9,6 +9,7 @@ export const shuffleEmail = oc
       originalEmail: z.string(),
       shuffledEmail: z.string(),
     }),
-  );
+  )
+  .route({ method: "POST", path: "/shuffle-email", successStatus: 200 });
 
 export const contracts = { shuffleEmail };
