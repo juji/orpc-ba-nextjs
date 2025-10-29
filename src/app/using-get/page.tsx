@@ -41,10 +41,12 @@ export default function UsingGetPage() {
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Test the hello procedure. This procedure is configured to use GET
-            method, while ORPC by default uses POST for all other requests. GET
-            requests are cacheable, which can improve performance for read-only
-            operations. Check the network tab in the developer panel to see the
-            request.
+            method, while ORPC by default uses POST for all other requests.
+          </p>
+          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            GET requests are cacheable, which can improve performance for
+            read-only operations. Check the network tab in the developer panel
+            to see the request.
           </p>
         </div>
 
