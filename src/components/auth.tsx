@@ -25,9 +25,8 @@ interface SessionData {
 export default function Auth() {
   const [session, setSession] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState("user@example.com");
+  const [password, setPassword] = useState("asdfasdf");
 
   useEffect(() => {
     const getSession = async () => {
@@ -54,32 +53,10 @@ export default function Auth() {
       // Refresh session after sign in
       const session = await authClient.getSession();
       setSession(session.data);
-      setEmail("");
-      setPassword("");
+      setEmail("user@example.com");
+      setPassword("asdfasdf");
     } catch (error) {
       console.error("Sign in failed:", error);
-    }
-  };
-
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await authClient.signUp.email({
-        email,
-        password,
-        name: email.split("@")[0], // Use email prefix as name
-      });
-      // After signup, sign in
-      await authClient.signIn.email({
-        email,
-        password,
-      });
-      const session = await authClient.getSession();
-      setSession(session.data);
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      console.error("Sign up failed:", error);
     }
   };
 
@@ -123,18 +100,11 @@ export default function Auth() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>{isSignUp ? "Create Account" : "Sign In"}</CardTitle>
-        <CardDescription>
-          {isSignUp
-            ? "Create a new account to get started"
-            : "Enter your credentials to sign in"}
-        </CardDescription>
+        <CardTitle>Sign In</CardTitle>
+        <CardDescription>Enter your credentials to sign in</CardDescription>
       </CardHeader>
       <CardContent>
-        <form
-          onSubmit={isSignUp ? handleSignUp : handleSignIn}
-          className="space-y-4"
-        >
+        <form onSubmit={handleSignIn} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -158,20 +128,9 @@ export default function Auth() {
             />
           </div>
           <Button type="submit" className="w-full">
-            {isSignUp ? "Create Account" : "Sign In"}
+            Sign In
           </Button>
         </form>
-        <div className="mt-4 text-center">
-          <Button
-            variant="link"
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm"
-          >
-            {isSignUp
-              ? "Already have an account? Sign in"
-              : "Don't have an account? Sign up"}
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );
