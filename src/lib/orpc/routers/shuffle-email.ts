@@ -8,7 +8,7 @@ interface AuthContext {
     email: string;
     name?: string;
   };
-  session?: any;
+  session?: unknown;
 }
 
 // Create implementer for user contract with auth context
@@ -25,7 +25,12 @@ export const shuffleEmail = os.shuffleEmail
     return next();
   })
   .handler(({ context }) => {
-    const email = context.user!.email;
+    const email = context.user?.email;
+    if (!email) {
+      throw new ORPCError("INTERNAL_SERVER_ERROR", {
+        message: "User email not found after authentication check",
+      });
+    }
     const shuffled = email
       .split("")
       .sort(() => Math.random() - 0.5)
