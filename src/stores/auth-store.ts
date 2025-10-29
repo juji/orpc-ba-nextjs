@@ -17,6 +17,7 @@ interface AuthState {
   loading: boolean;
   initialized: boolean;
   signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, name?: string) => Promise<void>;
   signOut: () => Promise<void>;
   getSession: () => Promise<void>;
 }
@@ -39,6 +40,24 @@ export const useAuthStore = create<AuthState>((set) => ({
       });
     } catch (error) {
       console.error("Sign in failed:", error);
+      throw error;
+    }
+  },
+
+  signUp: async (email: string, password: string, name?: string) => {
+    try {
+      await authClient.signUp.email({
+        email,
+        password,
+        name: name || email.split("@")[0], // Use email prefix as default name
+      });
+      // Refresh session after sign up
+      const session = await authClient.getSession();
+      set({
+        session: session.data,
+      });
+    } catch (error) {
+      console.error("Sign up failed:", error);
       throw error;
     }
   },

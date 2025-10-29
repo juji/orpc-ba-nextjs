@@ -1,4 +1,5 @@
 import Auth from "@/components/auth";
+import Register from "@/components/register";
 import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
@@ -8,7 +9,7 @@ export default function Home() {
 
       <main className="flex-1 lg:ml-0">
         <div className="flex min-h-screen items-center justify-center">
-          <div className="w-full max-w-3xl px-16 py-32">
+          <div className="w-full max-w-5xl px-4 py-8 lg:px-16 lg:py-32">
             <div className="flex flex-col gap-6 items-start text-left mb-10">
               <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
                 Welcome to ORPC Test Application
@@ -18,7 +19,10 @@ export default function Home() {
                 Better Auth and Drizzle ORM.
               </p>
             </div>
-            <Auth />
+            <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
+              <Auth />
+              <Register />
+            </div>
           </div>
         </div>
       </main>
