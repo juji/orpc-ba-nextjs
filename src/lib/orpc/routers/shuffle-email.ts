@@ -1,4 +1,4 @@
-import { implement } from "@orpc/server";
+import { implement, ORPCError } from "@orpc/server";
 import { contracts } from "../contracts/shuffle-email";
 
 // Define context type for authenticated procedures
@@ -18,7 +18,9 @@ const os = implement(contracts).$context<AuthContext>();
 export const shuffleEmail = os.shuffleEmail
   .use(async ({ context, next }) => {
     if (!context.user?.email) {
-      throw new Error("User must be authenticated to shuffle email");
+      throw new ORPCError("UNAUTHORIZED", {
+        message: "User must be authenticated to shuffle email",
+      });
     }
     return next();
   })
