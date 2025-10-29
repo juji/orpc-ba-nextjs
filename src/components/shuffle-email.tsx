@@ -10,7 +10,7 @@ export default function ShuffleEmail() {
   const shuffleUserEmail = async () => {
     setLoading(true);
     try {
-      const result = await typedClient.shuffleEmail({});
+      const result = await typedClient["shuffle-email"]({});
       setShuffledResult(
         `Original: ${result.originalEmail}\nShuffled: ${result.shuffledEmail}`,
       );

@@ -7,5 +7,5 @@ export const orpcRouters = {
   hello,
   add,
   multiply,
-  shuffleEmail,
+  "shuffle-email": shuffleEmail,
 };
