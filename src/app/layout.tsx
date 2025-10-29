@@ -35,9 +35,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen bg-zinc-50 font-sans dark:bg-black">
+          <div className="flex min-h-screen bg-zinc-50 font-sans dark:bg-black relative">
             <Sidebar />
-            <main className="flex-1 w-full lg:ml-0">{children}</main>
+            <main className="flex-1 w-full min-h-screen transition-transform duration-300 ease-in-out lg:translate-x-0 lg:w-auto">
+              {children}
+            </main>
           </div>
         </ThemeProvider>
       </body>
