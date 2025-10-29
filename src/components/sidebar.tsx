@@ -2,14 +2,10 @@
 
 import {
   Calculator,
-  Database,
   Home,
   LogIn,
   LogOut,
   MessageCircle,
-  Settings,
-  Shield,
-  User,
   X,
 } from "lucide-react";
 import { useState } from "react";
