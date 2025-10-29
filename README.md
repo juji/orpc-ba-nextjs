@@ -139,13 +139,6 @@ The application uses PostgreSQL with Drizzle ORM:
 - **TypeScript**: Full type safety
 - **Pre-commit hooks**: Automated code quality checks with lefthook
 
-### File Naming Convention
-All filenames in `/src` directory must use lowercase with hyphens:
-- ✅ `user-profile.tsx`
-- ✅ `auth-config.ts`
-- ❌ `UserProfile.tsx`
-- ❌ `authConfig.ts`
-
 ## Deployment
 
 The application is configured for deployment to Vercel with GitHub Actions:
