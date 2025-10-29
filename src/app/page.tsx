@@ -1,7 +1,6 @@
-import { createAuthClient } from 'better-auth/react';
-import AuthButtons from '@/components/auth-buttons';
+import AuthButtons from "@/components/auth-buttons";
 
-const authClient = createAuthClient();
+// const _authClient = createAuthClient();
 
 export default function Home() {
   return (
@@ -12,7 +11,8 @@ export default function Home() {
             Welcome to ORPC Business Application
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            A modern Next.js application with authentication powered by Better Auth and Drizzle ORM.
+            A modern Next.js application with authentication powered by Better
+            Auth and Drizzle ORM.
           </p>
         </div>
         <AuthButtons />

@@ -1,12 +1,19 @@
-'use client';
+"use client";
 
-import { createAuthClient } from 'better-auth/react';
-import { useState, useEffect } from 'react';
+import { createAuthClient } from "better-auth/react";
+import { useEffect, useState } from "react";
 
 const authClient = createAuthClient();
 
+interface SessionData {
+  user?: {
+    name?: string;
+    email?: string;
+  };
+}
+
 export default function AuthButtons() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,7 +22,7 @@ export default function AuthButtons() {
         const session = await authClient.getSession();
         setSession(session.data);
       } catch (error) {
-        console.error('Failed to get session:', error);
+        console.error("Failed to get session:", error);
       } finally {
         setLoading(false);
       }
@@ -27,14 +34,14 @@ export default function AuthButtons() {
   const handleSignIn = async () => {
     try {
       await authClient.signIn.email({
-        email: 'test@example.com',
-        password: 'password123',
+        email: "test@example.com",
+        password: "password123",
       });
       // Refresh session after sign in
       const session = await authClient.getSession();
       setSession(session.data);
     } catch (error) {
-      console.error('Sign in failed:', error);
+      console.error("Sign in failed:", error);
     }
   };
 
@@ -43,7 +50,7 @@ export default function AuthButtons() {
       await authClient.signOut();
       setSession(null);
     } catch (error) {
-      console.error('Sign out failed:', error);
+      console.error("Sign out failed:", error);
     }
   };
 
@@ -65,6 +72,7 @@ export default function AuthButtons() {
             Welcome, {session.user?.name || session.user?.email}!
           </div>
           <button
+            type="button"
             onClick={handleSignOut}
             className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/8 px-5 transition-colors hover:border-transparent hover:bg-black/4 dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
           >
@@ -73,6 +81,7 @@ export default function AuthButtons() {
         </div>
       ) : (
         <button
+          type="button"
           onClick={handleSignIn}
           className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
         >
