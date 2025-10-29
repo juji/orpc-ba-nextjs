@@ -8,6 +8,7 @@ import {
   MessageCircle,
   X,
 } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -41,6 +42,8 @@ export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
+
+  console.log("Sidebar session:", session);
 
   const handleSignOut = async () => {
     try {
@@ -113,7 +116,7 @@ export function Sidebar({ className }: SidebarProps) {
               const Icon = item.icon;
               const isCurrent = pathname === item.href;
               return (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
@@ -126,7 +129,7 @@ export function Sidebar({ className }: SidebarProps) {
                 >
                   <Icon className="h-4 w-4 shrink-0" />
                   <span className="truncate">{item.name}</span>
-                </a>
+                </Link>
               );
             })}
           </nav>
