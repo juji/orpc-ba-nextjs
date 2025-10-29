@@ -1,26 +1,20 @@
 import { implement } from "@orpc/server";
-import { mathContract } from "../contracts/math";
+import { contracts } from "../contracts/math";
 
 // Create implementer for math contract
-const os = implement(mathContract);
+const os = implement(contracts);
 
 // Math procedure implementations
-export const addProcedure = os.add.handler(({ input }) => {
+export const add = os.add.handler(({ input }) => {
   const { a, b } = input;
   return {
     result: a + b,
   };
 });
 
-export const multiplyProcedure = os.multiply.handler(({ input }) => {
+export const multiply = os.multiply.handler(({ input }) => {
   const { a, b } = input;
   return {
     result: a * b,
   };
 });
-
-// Math router
-export const mathRouter = {
-  add: addProcedure,
-  multiply: multiplyProcedure,
-};

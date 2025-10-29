@@ -1,8 +1,9 @@
-import { helloContract } from "./hello";
-import { mathContract } from "./math";
+import { hello } from "./hello";
+import { add, multiply } from "./math";
 
 // Combined ORPC contract
 export const orpcContract = {
-  ...helloContract,
-  ...mathContract,
+  hello,
+  add,
+  multiply,
 };

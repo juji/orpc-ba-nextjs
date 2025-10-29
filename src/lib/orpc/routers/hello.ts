@@ -1,11 +1,11 @@
 import { implement } from "@orpc/server";
-import { helloContract } from "../contracts/hello";
+import { contracts } from "../contracts/hello";
 
 // Create implementer for hello contract
-const os = implement(helloContract);
+const os = implement(contracts);
 
 // Hello procedure implementation
-export const helloProcedure = os.hello.handler(({ input }) => {
+export const hello = os.hello.handler(({ input }) => {
   const { name } = input;
   const message = name ? `Hello, ${name}!` : "Hello, World!";
   return {
@@ -13,8 +13,3 @@ export const helloProcedure = os.hello.handler(({ input }) => {
     timestamp: new Date(),
   };
 });
-
-// Hello router
-export const helloRouter = {
-  hello: helloProcedure,
-};
