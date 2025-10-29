@@ -40,7 +40,7 @@ const navigationItems = [
 export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { data: session, isPending: loading } = useSession();
+  const { data: session } = useSession();
 
   const handleSignOut = async () => {
     try {
