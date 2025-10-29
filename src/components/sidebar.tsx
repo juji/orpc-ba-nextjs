@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Calculator,
   Database,
   Home,
   LogIn,
@@ -26,6 +27,12 @@ const navigationItems = [
     href: "/",
     icon: Home,
     current: true,
+  },
+  {
+    name: "Basic",
+    href: "/basic",
+    icon: Calculator,
+    current: false,
   },
   {
     name: "Profile",
