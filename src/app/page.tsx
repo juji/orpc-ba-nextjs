@@ -1,6 +1,6 @@
 import Auth from "@/components/auth";
 import ORPCTest from "@/components/orpc-test";
-import Register from "@/components/register";
+// import Register from "@/components/register";
 import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
