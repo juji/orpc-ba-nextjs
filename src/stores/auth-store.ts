@@ -73,6 +73,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   getSession: async () => {
+    console.log("Getting session...");
     try {
       const session = await authClient.getSession();
       set({ session: session.data, loading: false, initialized: true });
