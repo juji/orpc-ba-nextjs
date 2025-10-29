@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,17 +14,9 @@ import { Label } from "@/components/ui/label";
 import { useAuthStore } from "@/stores/auth-store";
 
 export default function Auth() {
-  const {
-    session,
-    loading,
-    email,
-    password,
-    setEmail,
-    setPassword,
-    signIn,
-    signOut,
-    getSession,
-  } = useAuthStore();
+  const { session, loading, signIn, signOut, getSession } = useAuthStore();
+  const [email, setEmail] = useState("user@example.com");
+  const [password, setPassword] = useState("asdfasdf");
 
   useEffect(() => {
     getSession();
@@ -33,7 +25,7 @@ export default function Auth() {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signIn();
+      await signIn(email, password);
     } catch (_error) {
       // Error is already logged in the store
     }

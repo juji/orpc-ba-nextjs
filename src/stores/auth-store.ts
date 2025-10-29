@@ -15,27 +15,16 @@ interface SessionData {
 interface AuthState {
   session: SessionData | null;
   loading: boolean;
-  email: string;
-  password: string;
-  setEmail: (email: string) => void;
-  setPassword: (password: string) => void;
-  signIn: () => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   getSession: () => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>((set, get) => ({
+export const useAuthStore = create<AuthState>((set) => ({
   session: null,
   loading: true,
-  email: "user@example.com",
-  password: "asdfasdf",
 
-  setEmail: (email: string) => set({ email }),
-
-  setPassword: (password: string) => set({ password }),
-
-  signIn: async () => {
-    const { email, password } = get();
+  signIn: async (email: string, password: string) => {
     try {
       await authClient.signIn.email({
         email,
@@ -45,8 +34,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const session = await authClient.getSession();
       set({
         session: session.data,
-        email: "user@example.com",
-        password: "asdfasdf",
       });
     } catch (error) {
       console.error("Sign in failed:", error);
