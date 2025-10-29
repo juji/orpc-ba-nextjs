@@ -22,7 +22,7 @@ export default function BasicPage() {
   const testAdd = async () => {
     const numA = parseFloat(a);
     const numB = parseFloat(b);
-    if (isNaN(numA) || isNaN(numB)) {
+    if (Number.isNaN(numA) || Number.isNaN(numB)) {
       setMathResult(null);
       return;
     }
@@ -42,7 +42,7 @@ export default function BasicPage() {
   const testMultiply = async () => {
     const numA = parseFloat(a);
     const numB = parseFloat(b);
-    if (isNaN(numA) || isNaN(numB)) {
+    if (Number.isNaN(numA) || Number.isNaN(numB)) {
       setMathResult(null);
       return;
     }
