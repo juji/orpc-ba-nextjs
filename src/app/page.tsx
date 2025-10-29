@@ -3,12 +3,6 @@ import Auth from "@/components/auth";
 import ShuffleEmail from "@/components/shuffle-email";
 // import Register from "@/components/register";
 
-export const metadata = {
-  title: "ORPC test app",
-  description:
-    "A modern Next.js application with authentication powered by Better Auth and Drizzle ORM.",
-};
-
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center">
