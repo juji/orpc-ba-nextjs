@@ -6,6 +6,7 @@ import {
   Home,
   LogIn,
   LogOut,
+  MessageCircle,
   Settings,
   Shield,
   User,
@@ -32,6 +33,12 @@ const navigationItems = [
     name: "Basic",
     href: "/basic",
     icon: Calculator,
+    current: false,
+  },
+  {
+    name: "Using GET",
+    href: "/using-get",
+    icon: MessageCircle,
     current: false,
   },
   {
