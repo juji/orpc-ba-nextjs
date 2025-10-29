@@ -9,11 +9,11 @@ import {
   X,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/ui/shadcn-io/theme-switcher";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/stores/auth-store";
+import { authClient, useSession } from "@/stores/auth-store";
 
 interface SidebarProps {
   className?: string;
@@ -40,17 +40,11 @@ const navigationItems = [
 export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { session, initialized, signOut, getSession } = useAuthStore();
-
-  useEffect(() => {
-    if (!initialized) {
-      getSession();
-    }
-  }, [initialized, getSession]);
+  const { data: session, isPending: loading } = useSession();
 
   const handleSignOut = async () => {
     try {
-      await signOut();
+      await authClient.signOut();
     } catch (_error) {
       // Error is already logged in the store
     }

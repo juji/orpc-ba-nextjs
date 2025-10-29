@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,24 +11,22 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuthStore } from "@/stores/auth-store";
+import { authClient, useSession } from "@/stores/auth-store";
 
 export default function Register() {
-  const { session, loading, initialized, signUp, getSession } = useAuthStore();
+  const { data: session, isPending: loading } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  useEffect(() => {
-    if (!initialized) {
-      getSession();
-    }
-  }, [initialized, getSession]);
-
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signUp(email, password, name);
+      await authClient.signUp.email({
+        email,
+        password,
+        name: name || email.split("@")[0],
+      });
     } catch (_error) {
       // Error is already logged in the store
     }

@@ -11,17 +11,20 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuthStore } from "@/stores/auth-store";
+import { authClient, useSession } from "@/stores/auth-store";
 
 export default function Auth() {
-  const { session, loading, signIn, signOut } = useAuthStore();
+  const { data: session, isPending: loading } = useSession();
   const [email, setEmail] = useState("user@example.com");
   const [password, setPassword] = useState("asdfasdf");
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signIn(email, password);
+      await authClient.signIn.email({
+        email,
+        password,
+      });
     } catch (_error) {
       // Error is already logged in the store
     }
@@ -29,7 +32,7 @@ export default function Auth() {
 
   const handleSignOut = async () => {
     try {
-      await signOut();
+      await authClient.signOut();
     } catch (_error) {
       // Error is already logged in the store
     }
