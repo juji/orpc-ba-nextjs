@@ -28,7 +28,8 @@ export default function ShuffleEmail() {
       </h2>
       <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
         Click the button to shuffle the characters in your authenticated email
-        address. You must be signed in to use this feature.
+        address. You must be signed in to use this feature. Check the network
+        tab in the developer panel to see the request.
       </p>
 
       <button
