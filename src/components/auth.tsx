@@ -1,7 +1,6 @@
 "use client";
 
-import { createAuthClient } from "better-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,60 +11,39 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-const authClient = createAuthClient();
-
-interface SessionData {
-  user?: {
-    name?: string;
-    email?: string;
-  };
-}
+import { useAuthStore } from "@/stores/auth-store";
 
 export default function Auth() {
-  const [session, setSession] = useState<SessionData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState("user@example.com");
-  const [password, setPassword] = useState("asdfasdf");
+  const {
+    session,
+    loading,
+    email,
+    password,
+    setEmail,
+    setPassword,
+    signIn,
+    signOut,
+    getSession,
+  } = useAuthStore();
 
   useEffect(() => {
-    const getSession = async () => {
-      try {
-        const session = await authClient.getSession();
-        setSession(session.data);
-      } catch (error) {
-        console.error("Failed to get session:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     getSession();
-  }, []);
+  }, [getSession]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await authClient.signIn.email({
-        email,
-        password,
-      });
-      // Refresh session after sign in
-      const session = await authClient.getSession();
-      setSession(session.data);
-      setEmail("user@example.com");
-      setPassword("asdfasdf");
-    } catch (error) {
-      console.error("Sign in failed:", error);
+      await signIn();
+    } catch (_error) {
+      // Error is already logged in the store
     }
   };
 
   const handleSignOut = async () => {
     try {
-      await authClient.signOut();
-      setSession(null);
-    } catch (error) {
-      console.error("Sign out failed:", error);
+      await signOut();
+    } catch (_error) {
+      // Error is already logged in the store
     }
   };
 
