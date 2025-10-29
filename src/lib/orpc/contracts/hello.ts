@@ -4,6 +4,7 @@ import { z } from "zod";
 // Hello world contract
 export const helloContract = {
   hello: oc
+    .route({ method: "GET" })
     .input(
       z.object({
         name: z.string().optional(),
