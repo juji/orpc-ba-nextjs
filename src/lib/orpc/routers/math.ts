@@ -20,7 +20,7 @@ export const multiplyProcedure = os.multiply.handler(({ input }) => {
 });
 
 // Math router
-export const mathRouter = os.router({
+export const mathRouter = {
   add: addProcedure,
   multiply: multiplyProcedure,
-});
+};

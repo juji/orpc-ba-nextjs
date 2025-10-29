@@ -15,6 +15,6 @@ export const helloProcedure = os.hello.handler(({ input }) => {
 });
 
 // Hello router
-export const helloRouter = os.router({
+export const helloRouter = {
   hello: helloProcedure,
-});
+};
