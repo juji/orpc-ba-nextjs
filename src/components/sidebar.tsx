@@ -8,6 +8,7 @@ import {
   MessageCircle,
   X,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/ui/shadcn-io/theme-switcher";
@@ -23,24 +24,22 @@ const navigationItems = [
     name: "Home",
     href: "/",
     icon: Home,
-    current: true,
   },
   {
     name: "Basic",
     href: "/basic",
     icon: Calculator,
-    current: false,
   },
   {
     name: "Using GET",
     href: "/using-get",
     icon: MessageCircle,
-    current: false,
   },
 ];
 
 export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   const { session, signOut } = useAuthStore();
 
   const handleSignOut = async () => {
@@ -112,13 +111,14 @@ export function Sidebar({ className }: SidebarProps) {
           <nav className="flex-1 space-y-1 p-4">
             {navigationItems.map((item) => {
               const Icon = item.icon;
+              const isCurrent = pathname === item.href;
               return (
                 <a
                   key={item.name}
                   href={item.href}
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    item.current
+                    isCurrent
                       ? "bg-accent text-accent-foreground"
                       : "text-muted-foreground",
                   )}
