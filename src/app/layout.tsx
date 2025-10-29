@@ -37,7 +37,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen bg-zinc-50 font-sans dark:bg-black">
             <Sidebar />
-            <main className="flex-1 lg:ml-0">{children}</main>
+            <main className="flex-1 w-full lg:ml-0">{children}</main>
           </div>
         </ThemeProvider>
       </body>
