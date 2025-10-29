@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,16 +14,9 @@ import { Label } from "@/components/ui/label";
 import { useAuthStore } from "@/stores/auth-store";
 
 export default function Auth() {
-  const { session, loading, initialized, signIn, signOut, getSession } =
-    useAuthStore();
+  const { session, loading, signIn, signOut } = useAuthStore();
   const [email, setEmail] = useState("user@example.com");
   const [password, setPassword] = useState("asdfasdf");
-
-  useEffect(() => {
-    if (!initialized) {
-      getSession();
-    }
-  }, [initialized, getSession]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();

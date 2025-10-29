@@ -9,7 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/ui/shadcn-io/theme-switcher";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,13 @@ const navigationItems = [
 export function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { session, signOut } = useAuthStore();
+  const { session, initialized, signOut, getSession } = useAuthStore();
+
+  useEffect(() => {
+    if (!initialized) {
+      getSession();
+    }
+  }, [initialized, getSession]);
 
   const handleSignOut = async () => {
     try {
