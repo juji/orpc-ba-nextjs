@@ -1,8 +1,4 @@
-"use client";
-
-import { useServerAction } from "@orpc/react/hooks";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -10,29 +6,41 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { serverAction } from "@/lib/orpc/routers/server-action";
+import { ServerActionForm } from "./server-action-form";
 
-export default function ServerActionPage() {
-  const [formData, setFormData] = useState({ email: "" });
+// Create a server action that can be called directly from forms
+async function subscribeAction(formData: FormData) {
+  "use server";
 
-  const { execute, data, error, status } = useServerAction(serverAction);
+  const email = formData.get("email") as string;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  try {
+    // Call the router implementation directly
+    const result = await serverAction({ email });
 
-    const result = await execute({ email: formData.email });
+    // On success, redirect with success message
+    redirect(`/server-action?success=true&email=${encodeURIComponent(email)}`);
+  } catch (error) {
+    // On error, redirect with error message
+    const errorMessage =
+      error instanceof Error ? error.message : "An error occurred";
+    redirect(
+      `/server-action?error=${encodeURIComponent(errorMessage)}&email=${encodeURIComponent(email)}`,
+    );
+  }
+}
 
-    if (result[0]) {
-      // Error occurred
-      console.error("Server action error:", result[0]);
-    } else {
-      // Success
-      console.log("Server action success:", result[1]);
-      setFormData({ email: "" });
-    }
-  };
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function ServerActionPage({ searchParams }: PageProps) {
+  const success = searchParams.success === "true";
+  const error =
+    typeof searchParams.error === "string" ? searchParams.error : null;
+  const email =
+    typeof searchParams.email === "string" ? searchParams.email : "";
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -48,52 +56,14 @@ export default function ServerActionPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="max-w-md">
-            <CardHeader>
-              <CardTitle>Subscribe to Newsletter</CardTitle>
-              <CardDescription>
-                Submit an email using oRPC Server Actions. Try using
-                "admin@example.com" to see error handling.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ email: e.target.value })}
-                    placeholder="Enter your email"
-                    required
-                  />
-                  {error && (
-                    <p className="text-sm text-red-600 dark:text-red-400">
-                      {error.message}
-                    </p>
-                  )}
-                </div>
+          <ServerActionForm
+            action={subscribeAction}
+            initialEmail={email}
+            success={success}
+            error={error}
+          />
 
-                <Button
-                  type="submit"
-                  disabled={status === "pending"}
-                  className="w-full"
-                >
-                  {status === "pending" ? "Subscribing..." : "Subscribe"}
-                </Button>
-
-                {error && (
-                  <div className="text-sm text-red-600 dark:text-red-400">
-                    <p className="mb-2 font-medium">Error</p>
-                    <p>{error.message}</p>
-                  </div>
-                )}
-              </form>
-            </CardContent>
-          </Card>
-
-          {data && (
+          {success && (
             <Card className="max-w-4xl">
               <CardHeader>
                 <CardTitle>Successfully Subscribed</CardTitle>
@@ -104,7 +74,7 @@ export default function ServerActionPage() {
               <CardContent>
                 <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
                   <pre className="text-sm text-green-800 dark:text-green-200">
-                    {JSON.stringify(data, null, 2)}
+                    {JSON.stringify({ email, success: true }, null, 2)}
                   </pre>
                 </div>
               </CardContent>
