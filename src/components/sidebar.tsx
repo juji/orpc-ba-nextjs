@@ -4,6 +4,7 @@ import {
   Activity,
   AlertTriangle,
   Calculator,
+  FileText,
   Home,
   LogIn,
   LogOut,
@@ -59,6 +60,12 @@ const navigationItems = [
     name: "Server Action",
     href: "/server-action",
     icon: Zap,
+  },
+  {
+    name: "Docs",
+    href: "/rpc",
+    icon: FileText,
+    external: true,
   },
 ];
 
@@ -148,6 +155,10 @@ export function Sidebar({ className }: SidebarProps) {
                       : "text-muted-foreground",
                   )}
                   onClick={() => setIsOpen(false)} // Close mobile menu on navigation
+                  {...(item.external && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
                 >
                   <Icon className="h-4 w-4 shrink-0" />
                   <span className="truncate">{item.name}</span>
@@ -191,6 +202,7 @@ export function Sidebar({ className }: SidebarProps) {
                 href="https://github.com/juji/orpc-ba-nextjs"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Github
               </Link>
