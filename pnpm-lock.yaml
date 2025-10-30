@@ -20,6 +20,9 @@ importers:
       '@orpc/openapi-client':
         specifier: ^1.10.2
         version: 1.10.2
+      '@orpc/react':
+        specifier: ^1.10.2
+        version: 1.10.2(react@19.2.0)(ws@8.18.3)
       '@orpc/server':
         specifier: ^1.10.2
         version: 1.10.2(ws@8.18.3)
@@ -737,6 +740,11 @@ packages:
 
   '@orpc/openapi@1.10.2':
     resolution: {integrity: sha512-ydV2GDn5sF1QqkzQfleJYWnPY21SjZx9zCR/gnntIOKc2HsZ3gx8OD/SBk2ZvvV7mXQ6f8u4UyrZob4SEF40Lw==}
+
+  '@orpc/react@1.10.2':
+    resolution: {integrity: sha512-xB7mbPI79LUs8S9wydXP3aJpiVKu2zp+jWygDqW2Rv74cSXJ8R452vAS8flDXSBuDrdzQmGDjkjYaU3qU+7mJg==}
+    peerDependencies:
+      react: '>=18.0.0'
 
   '@orpc/server@1.10.2':
     resolution: {integrity: sha512-7VxwEqOzB9SO4yb5gks0wWNFZAjrz8moInThXqo3gfyVCn7ghwpFQ0szQyFog0smU86+bF2WJ03b54mEBlERbA==}
@@ -2109,6 +2117,20 @@ snapshots:
       '@orpc/shared': 1.10.2
       '@orpc/standard-server': 1.10.2
       rou3: 0.7.9
+    transitivePeerDependencies:
+      - '@opentelemetry/api'
+      - crossws
+      - fastify
+      - ws
+
+  '@orpc/react@1.10.2(react@19.2.0)(ws@8.18.3)':
+    dependencies:
+      '@orpc/client': 1.10.2
+      '@orpc/contract': 1.10.2
+      '@orpc/openapi-client': 1.10.2
+      '@orpc/server': 1.10.2(ws@8.18.3)
+      '@orpc/shared': 1.10.2
+      react: 19.2.0
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - crossws

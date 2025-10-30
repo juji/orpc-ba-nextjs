@@ -2,6 +2,10 @@
 
 A modern Next.js application demonstrating ORPC (OpenRPC) with Better Auth authentication and Drizzle ORM. This project showcases type-safe API procedures, authentication flows, and various HTTP methods.
 
+## Deployment
+
+https://orpc-ba-nextjs.vercel.app/
+
 ## Features
 
 - **ORPC Integration**: Type-safe API procedures with automatic client generation

@@ -10,6 +10,7 @@ import {
   MessageCircle,
   Upload,
   X,
+  Zap,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -53,6 +54,11 @@ const navigationItems = [
     name: "Event Iterator",
     href: "/event-iterator",
     icon: Activity,
+  },
+  {
+    name: "Server Action",
+    href: "/server-action",
+    icon: Zap,
   },
 ];
 

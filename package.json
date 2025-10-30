@@ -19,6 +19,7 @@
     "@orpc/contract": "^1.10.2",
     "@orpc/openapi": "^1.10.2",
     "@orpc/openapi-client": "^1.10.2",
+    "@orpc/react": "^1.10.2",
     "@orpc/server": "^1.10.2",
     "@orpc/standard-server-node": "^1.10.2",
     "@orpc/zod": "^1.10.2",
