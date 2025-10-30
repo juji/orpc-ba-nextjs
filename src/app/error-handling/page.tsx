@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { typedClient } from "@/lib/orpc/client";
 
@@ -16,6 +17,13 @@ export default function ErrorHandlingPage() {
   const [shouldError, setShouldError] = useState(true);
   const [result, setResult] = useState<string>("");
   const [loading, setLoading] = useState(false);
+
+  // Form validation state
+  const [formData, setFormData] = useState({
+    name: "",
+  });
+  const [formResult, setFormResult] = useState<string>("");
+  const [formLoading, setFormLoading] = useState(false);
 
   const testErrorHandling = async () => {
     setLoading(true);
@@ -29,6 +37,29 @@ export default function ErrorHandlingPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const testFormValidation = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormResult("");
+
+    try {
+      const response = await typedClient.formValidation({
+        name: formData.name,
+      });
+      setFormResult(`Success: ${response.message}`);
+    } catch (error) {
+      setFormResult(
+        `Validation Error: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -45,34 +76,70 @@ export default function ErrorHandlingPage() {
           </p>
         </div>
 
-        <Card className="max-w-md">
-          <CardHeader>
-            <CardTitle>Error Handling Test</CardTitle>
-            <CardDescription>
-              Test the error handling procedure with optional error triggering.
-              The following throws error on invocation, resulting in Internal
-              server error (500):
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="shouldError"
-                checked={shouldError}
-                onChange={(e) => setShouldError(e.target.checked)}
-                className="rounded border border-gray-300"
-              />
-              <Label htmlFor="shouldError">Should throw error</Label>
-            </div>
-            <Button onClick={testErrorHandling} disabled={loading}>
-              {loading ? "Testing..." : "Test Error Handling"}
-            </Button>
-            {result && (
-              <p className="text-sm text-muted-foreground">{result}</p>
-            )}
-          </CardContent>
-        </Card>
+        <div className="space-y-6">
+          <Card className="max-w-md">
+            <CardHeader>
+              <CardTitle>Error Handling Test</CardTitle>
+              <CardDescription>
+                Test the error handling procedure with optional error
+                triggering. The following throws error on invocation, resulting
+                in Internal server error (500):
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="shouldError"
+                  checked={shouldError}
+                  onChange={(e) => setShouldError(e.target.checked)}
+                  className="rounded border border-gray-300"
+                />
+                <Label htmlFor="shouldError">Should throw error</Label>
+              </div>
+              <Button onClick={testErrorHandling} disabled={loading}>
+                {loading ? "Testing..." : "Test Error Handling"}
+              </Button>
+              {result && (
+                <p className="text-sm text-muted-foreground">{result}</p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="max-w-md">
+            <CardHeader>
+              <CardTitle>Validation Error</CardTitle>
+              <CardDescription>
+                Test form validation that may result in validation errors. Try
+                submitting with invalid data to see validation errors.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={testFormValidation} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    This field is validated on the server: minimum 2 characters,
+                    maximum 5 characters.
+                  </p>
+                </div>
+                <Button type="submit" disabled={formLoading}>
+                  {formLoading ? "Validating..." : "Submit Form"}
+                </Button>
+                {formResult && (
+                  <p className="text-sm text-muted-foreground">{formResult}</p>
+                )}
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { z } from "zod";
 // Math operations contract
 
 export const add = oc
+  .route({ method: "POST", path: "/add" })
   .input(
     z.object({
       a: z.number(),
@@ -17,6 +18,7 @@ export const add = oc
   );
 
 export const multiply = oc
+  .route({ method: "POST", path: "/multiply" })
   .input(
     z.object({
       a: z.number(),

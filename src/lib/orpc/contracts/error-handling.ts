@@ -4,7 +4,7 @@ import { z } from "zod";
 // Error handling contract
 
 export const errorHandling = oc
-  .route({ method: "POST" })
+  .route({ method: "POST", path: "/error-handling" })
   .input(
     z.object({
       shouldError: z.boolean().optional(),
