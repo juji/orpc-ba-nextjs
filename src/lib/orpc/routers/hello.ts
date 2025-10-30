@@ -14,17 +14,9 @@ export const hello = os.hello.handler(({ input, context }) => {
   const message = name ? `Hello, ${name}!` : "Hello, World!";
 
   // Add caching headers for requests without a name (generic greeting)
-  if (!name) {
-    if (context.resHeaders) {
-      context.resHeaders.set("Cache-Control", "public, max-age=300"); // Cache for 5 minutes
-      context.resHeaders.set("CDN-Cache-Control", "max-age=3600"); // CDN cache for 1 hour
-    }
-
-    return {
-      message,
-      /* epoch timestamp */
-      timestamp: new Date("1970-01-01T00:00:00.000Z"),
-    };
+  if (!name && context.resHeaders) {
+    context.resHeaders.set("Cache-Control", "public, max-age=300"); // Cache for 5 minutes
+    context.resHeaders.set("CDN-Cache-Control", "max-age=3600"); // CDN cache for 1 hour
   }
 
   return {
