@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { serverAction } from "@/lib/orpc/routers/server-action";
+import { serverActionActionable as serverAction } from "@/lib/orpc/routers/server-action";
 
 interface ServerActionFormProps {
   action: (formData: FormData) => Promise<void>;

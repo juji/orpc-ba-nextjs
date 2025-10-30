@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { serverAction } from "@/lib/orpc/routers/server-action";
+import { subscribeToNewsletter } from "@/lib/orpc/routers/server-action";
 import { ServerActionForm } from "./server-action-form";
 
 // Create a server action that can be called directly from forms
@@ -16,8 +16,8 @@ async function subscribeAction(formData: FormData) {
   const email = formData.get("email") as string;
 
   try {
-    // Call the router implementation directly
-    const result = await serverAction({ email });
+    // Call the newsletter subscription logic directly
+    const result = await subscribeToNewsletter(email);
 
     // On success, redirect with success message
     redirect(`/server-action?success=true&email=${encodeURIComponent(email)}`);
@@ -25,6 +25,7 @@ async function subscribeAction(formData: FormData) {
     // On error, redirect with error message
     const errorMessage =
       error instanceof Error ? error.message : "An error occurred";
+    console.log("Server action error:", errorMessage, error);
     redirect(
       `/server-action?error=${encodeURIComponent(errorMessage)}&email=${encodeURIComponent(email)}`,
     );
