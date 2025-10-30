@@ -84,7 +84,7 @@ export function ServerActionForm({
     }
   };
 
-  const displayError = isEnhanced ? clientError?.message : error;
+  const displayError = error || clientError?.message;
 
   return (
     <>
