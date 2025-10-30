@@ -149,7 +149,7 @@ export default function ErrorHandlingPage() {
                   <div className="text-sm">
                     {formResultType === "success" ? (
                       <div className="text-green-600 dark:text-green-400">
-                        <p className="mb-2 font-medium">✅ Success</p>
+                        <p className="mb-2 font-medium">Success</p>
                         <p>{formResult}</p>
                       </div>
                     ) : (
