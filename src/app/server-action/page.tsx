@@ -25,10 +25,8 @@ async function subscribeAction(formData: FormData) {
     redirectUrl = `/server-action?success=true&email=${encodeURIComponent(email)}`;
   } catch (error) {
     // On error, prepare redirect with error message
-    console.log("Caught error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "An error occurred";
-    console.log("Error message to redirect with:", errorMessage);
     redirectUrl = `/server-action?error=${encodeURIComponent(errorMessage)}&email=${encodeURIComponent(email)}`;
   }
 
