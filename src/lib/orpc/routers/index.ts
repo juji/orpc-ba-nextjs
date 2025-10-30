@@ -1,3 +1,4 @@
+import { errorHandling } from "./error-handling";
 import { hello } from "./hello";
 import { add, multiply } from "./math";
 import { shuffleEmail } from "./shuffle-email";
@@ -8,4 +9,5 @@ export const orpcRouters = {
   add,
   multiply,
   shuffleEmail,
+  errorHandling,
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AlertTriangle,
   Calculator,
   Home,
   LogIn,
@@ -35,6 +36,11 @@ const navigationItems = [
     name: "Using GET",
     href: "/using-get",
     icon: MessageCircle,
+  },
+  {
+    name: "Error Handling",
+    href: "/error-handling",
+    icon: AlertTriangle,
   },
 ];
 
