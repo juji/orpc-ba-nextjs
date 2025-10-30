@@ -46,7 +46,7 @@ export default function UsingGetPage() {
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             GET requests are cacheable, which can improve performance for
             read-only operations. Check the network tab in the developer panel
-            to see the request.
+            to see the request. Requests with empty name are cached.
           </p>
         </div>
 
