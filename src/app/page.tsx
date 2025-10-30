@@ -3,7 +3,7 @@ import ShuffleEmail from "@/components/shuffle-email";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-200 via-indigo-200 to-purple-200 dark:from-slate-950 dark:via-blue-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-br from-blue-200 via-indigo-400 to-purple-200 dark:from-slate-950 dark:via-blue-950 dark:to-slate-900">
       <div className="flex min-h-screen items-center justify-center">
         <div className="max-w-5xl px-4 py-8 lg:px-16 lg:py-32">
           <div className="flex flex-col gap-6 items-start text-left mb-10">
