@@ -1,0 +1,14 @@
+name: Ping Supabase via Drizzle API Endpoint
+
+on:
+  schedule:
+    - cron: '0 0 * * 0,3' # Runs every Sunday and Wednesday at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send HTTP Request to Keep Supabase Alive
+        run: |
+          curl --fail --show-error --silent "https://orpc-ba-nextjs.vercel.app/api/health"
