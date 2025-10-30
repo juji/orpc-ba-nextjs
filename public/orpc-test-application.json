@@ -1,0 +1,485 @@
+{
+  "info": { "title": "ORPC Test Application", "version": "1.0.0" },
+  "servers": [{ "url": "/rpc" }],
+  "openapi": "3.1.1",
+  "paths": {
+    "/hello": {
+      "get": {
+        "operationId": "hello",
+        "description": "Returns a personalized greeting message with the current timestamp. If no name is provided, returns a generic 'Hello, World!' message.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "description": "Optional name to personalize the greeting"
+            },
+            "allowEmptyValue": true,
+            "allowReserved": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "The greeting message"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "x-native-type": "date",
+                      "description": "The current server timestamp"
+                    }
+                  },
+                  "required": ["message", "timestamp"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/add": {
+      "post": {
+        "operationId": "add",
+        "description": "Adds two numbers together and returns the sum.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "number",
+                    "description": "First number to add"
+                  },
+                  "b": {
+                    "type": "number",
+                    "description": "Second number to add"
+                  }
+                },
+                "required": ["a", "b"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "number",
+                      "description": "The sum of the two numbers"
+                    }
+                  },
+                  "required": ["result"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multiply": {
+      "post": {
+        "operationId": "multiply",
+        "description": "Multiplies two numbers and returns the product.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "a": {
+                    "type": "number",
+                    "description": "First number to multiply"
+                  },
+                  "b": {
+                    "type": "number",
+                    "description": "Second number to multiply"
+                  }
+                },
+                "required": ["a", "b"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "number",
+                      "description": "The product of the two numbers"
+                    }
+                  },
+                  "required": ["result"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shuffle-email": {
+      "post": {
+        "operationId": "shuffleEmail",
+        "description": "Shuffles the characters in the authenticated user's email address. **Requires user authentication.** This is a demonstration endpoint showing how to work with authenticated user data.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "No input required - uses authenticated user data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "originalEmail": {
+                      "type": "string",
+                      "description": "The original email address"
+                    },
+                    "shuffledEmail": {
+                      "type": "string",
+                      "description": "The email with shuffled characters"
+                    }
+                  },
+                  "required": ["originalEmail", "shuffledEmail"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/error-handling": {
+      "post": {
+        "operationId": "errorHandling",
+        "description": "Demonstrates error handling capabilities. Set shouldError to true to trigger an error response, or leave it false/undefined for a successful response.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shouldError": {
+                    "type": "boolean",
+                    "description": "Whether to intentionally trigger an error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Response message"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "description": "Whether the operation was successful"
+                    }
+                  },
+                  "required": ["message", "success"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form-validation": {
+      "post": {
+        "operationId": "formValidation",
+        "description": "Validates form data with specific constraints. Demonstrates Zod schema validation with custom error messages. The name field must be between 2-5 characters.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 5,
+                    "description": "Name field with length validation (2-5 characters)"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Validation result message"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "description": "Whether validation passed"
+                    },
+                    "validatedData": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "The validated name"
+                        }
+                      },
+                      "required": ["name"],
+                      "description": "The validated form data"
+                    }
+                  },
+                  "required": ["message", "success", "validatedData"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/file-upload": {
+      "post": {
+        "operationId": "fileUpload",
+        "description": "Uploads a file to the server. Supports JPEG, PNG, GIF, and PDF files up to 5MB in size. Returns file metadata upon successful upload.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "not": {},
+                    "description": "The file to upload (JPEG, PNG, GIF, or PDF, max 5MB)"
+                  }
+                },
+                "required": ["file"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Response message"
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "description": "Whether the upload was successful"
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "description": "Original filename"
+                    },
+                    "fileSize": {
+                      "type": "number",
+                      "description": "File size in bytes"
+                    },
+                    "fileType": {
+                      "type": "string",
+                      "description": "MIME type of the uploaded file"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "fileName",
+                    "fileSize",
+                    "fileType"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/event-iterator": {
+      "get": {
+        "operationId": "eventIterator",
+        "description": "Streams real-time events using Server-Sent Events (SSE). Sends periodic messages for a specified duration (1-60 seconds). Demonstrates event streaming capabilities with automatic reconnection support.",
+        "parameters": [
+          {
+            "name": "duration",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "description": "Duration in seconds for the event stream (1-60, defaults to system default)"
+            },
+            "allowEmptyValue": true,
+            "allowReserved": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "event": { "const": "message" },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "description": "Event message content"
+                            },
+                            "timestamp": {
+                              "type": "number",
+                              "description": "Unix timestamp of the event"
+                            },
+                            "count": {
+                              "type": "number",
+                              "description": "Sequential event counter"
+                            },
+                            "isEnd": {
+                              "type": "boolean",
+                              "description": "Whether this is the final event"
+                            }
+                          },
+                          "required": ["message", "timestamp", "count"],
+                          "description": "Real-time event data"
+                        },
+                        "id": { "type": "string" },
+                        "retry": { "type": "number" }
+                      },
+                      "required": ["event", "data"]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "event": { "const": "done" },
+                        "data": {},
+                        "id": { "type": "string" },
+                        "retry": { "type": "number" }
+                      },
+                      "required": ["event"]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "event": { "const": "error" },
+                        "data": {},
+                        "id": { "type": "string" },
+                        "retry": { "type": "number" }
+                      },
+                      "required": ["event"]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/server-action": {
+      "post": {
+        "operationId": "serverAction",
+        "description": "Demonstrates server-side data processing and validation. Shows how to handle form submissions on a no-script page.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Valid email address for user creation"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Fake id for the record"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email",
+                      "description": "The validated email address"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO timestamp of the request"
+                    }
+                  },
+                  "required": ["id", "email", "createdAt"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
