@@ -8,7 +8,7 @@ export const serverAction = oc
     method: "POST",
     path: "/server-action",
     description:
-      "Demonstrates server-side data processing and validation. Creates a user record with the provided email address. Shows how to handle form submissions and data persistence.",
+      "Demonstrates server-side data processing and validation. Shows how to handle form submissions on a no-script page.",
   })
   .input(
     z.object({
@@ -19,9 +19,9 @@ export const serverAction = oc
   )
   .output(
     z.object({
-      id: z.string().describe("Unique identifier for the created record"),
+      id: z.string().describe("Fake id for the record"),
       email: z.email().describe("The validated email address"),
-      createdAt: z.string().describe("ISO timestamp of record creation"),
+      createdAt: z.string().describe("ISO timestamp of the request"),
     }),
   );
 
