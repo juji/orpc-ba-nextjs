@@ -14,25 +14,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { serverAction } from "@/lib/orpc/routers/server-action";
 
-interface User {
-  id: string;
-  email: string;
-  createdAt: string;
-}
-
 export default function ServerActionPage() {
-  const [formData, setFormData] = useState({
-    email: "",
-  });
+  const [formData, setFormData] = useState({ email: "" });
 
   const { execute, data, error, status } = useServerAction(serverAction);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = await execute({
-      email: formData.email,
-    });
+    const result = await execute({ email: formData.email });
 
     if (result[0]) {
       // Error occurred
@@ -40,13 +30,8 @@ export default function ServerActionPage() {
     } else {
       // Success
       console.log("Server action success:", result[1]);
-      // Clear form on success
       setFormData({ email: "" });
     }
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -79,7 +64,7 @@ export default function ServerActionPage() {
                     id="email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    onChange={(e) => setFormData({ email: e.target.value })}
                     placeholder="Enter your email"
                     required
                   />
