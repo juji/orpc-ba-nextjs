@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
   Card,
@@ -18,21 +17,23 @@ async function subscribeAction(formData: FormData) {
   "use server";
 
   const email = formData.get("email") as string;
+  let redirectUrl: string;
 
   try {
     // Call the newsletter subscription logic directly
     const result = await subscribeToNewsletter(email);
-    redirect(`/server-action?success=true&email=${encodeURIComponent(email)}`);
+    redirectUrl = `/server-action?success=true&email=${encodeURIComponent(email)}`;
   } catch (error) {
-    // On error, redirect with error message
+    // On error, prepare redirect with error message
+    console.log("Caught error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "An error occurred";
-    // Instead of redirect, let's try revalidatePath and redirect
-    revalidatePath("/server-action");
-    redirect(
-      `/server-action?error=${encodeURIComponent(errorMessage)}&email=${encodeURIComponent(email)}`,
-    );
+    console.log("Error message to redirect with:", errorMessage);
+    redirectUrl = `/server-action?error=${encodeURIComponent(errorMessage)}&email=${encodeURIComponent(email)}`;
   }
+
+  // Redirect outside the try-catch to avoid catching the redirect error
+  redirect(redirectUrl);
 }
 
 interface PageProps {
