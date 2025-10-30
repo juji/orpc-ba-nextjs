@@ -1,32 +1,21 @@
-import { os } from "@orpc/server";
+import { oc } from "@orpc/contract";
 import { z } from "zod";
 
-// Server action contract
+// Server action contract (shape only - no handler)
 
-export const createUser = os
+export const serverAction = oc
   .route({ method: "POST", path: "/server-action" })
   .input(
     z.object({
-      email: z.email("Invalid email address"),
+      email: z.string().email("Invalid email address"),
     }),
   )
-  .handler(async ({ input }) => {
-    // Simulate server processing
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  .output(
+    z.object({
+      id: z.string(),
+      email: z.string().email(),
+      createdAt: z.string(),
+    }),
+  );
 
-    // Simulate potential error
-    if (input.email === "admin@example.com") {
-      throw new Error("A user with this email already exists");
-    }
-
-    return {
-      id: Math.random().toString(36).substr(2, 9),
-      email: input.email,
-      createdAt: new Date().toISOString(),
-    };
-  })
-  .actionable();
-
-export const contracts = { createUser };
-
-export { createUser as serverAction };
+export const contracts = { serverAction };
