@@ -162,7 +162,7 @@ export default function EventIteratorPage() {
                 </p>
               ) : (
                 <div className="space-y-2 max-h-96 overflow-y-auto">
-                  {events.map((event, index) => (
+                  {events.map((event, _index) => (
                     <div
                       key={`${event.timestamp}-${event.count}`}
                       className="p-3 border rounded-lg bg-muted/50"
