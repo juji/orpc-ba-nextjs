@@ -5,7 +5,7 @@ import {
   ResponseHeadersPlugin,
   SimpleCsrfProtectionHandlerPlugin,
 } from "@orpc/server/plugins";
-import { ZodToJsonSchemaConverter } from "@orpc/zod";
+import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
 import { auth } from "@/lib/auth";
 import { orpcRouter } from "@/lib/orpc";
 
