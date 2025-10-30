@@ -36,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen bg-zinc-50 font-sans dark:bg-black">
+          <div className="flex min-h-screen bg-linear-to-br from-blue-300 via-indigo-200 to-purple-300 font-sans dark:from-slate-950 dark:via-blue-950 dark:to-slate-900">
             <Sidebar />
             <main className="flex-1 lg:ml-0">{children}</main>
           </div>
