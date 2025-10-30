@@ -49,7 +49,9 @@ export default function ErrorHandlingPage() {
           <CardHeader>
             <CardTitle>Error Handling Test</CardTitle>
             <CardDescription>
-              Test the error handling procedure with optional error triggering
+              Test the error handling procedure with optional error triggering.
+              The following throws error on invocation, resulting in Internal
+              server error (500):
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
