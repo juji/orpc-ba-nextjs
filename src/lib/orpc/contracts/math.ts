@@ -4,10 +4,10 @@ import { z } from "zod";
 // Math operations contract
 
 export const add = oc
-  .route({ method: "POST", path: "/add" })
-  .meta({
+  .route({
+    method: "POST",
+    path: "/add",
     description: "Adds two numbers together and returns the sum.",
-    summary: "Add two numbers",
   })
   .input(
     z.object({
@@ -22,10 +22,10 @@ export const add = oc
   );
 
 export const multiply = oc
-  .route({ method: "POST", path: "/multiply" })
-  .meta({
+  .route({
+    method: "POST",
+    path: "/multiply",
     description: "Multiplies two numbers and returns the product.",
-    summary: "Multiply two numbers",
   })
   .input(
     z.object({

@@ -4,11 +4,11 @@ import { z } from "zod";
 // Error handling contract
 
 export const errorHandling = oc
-  .route({ method: "POST", path: "/error-handling" })
-  .meta({
+  .route({
+    method: "POST",
+    path: "/error-handling",
     description:
       "Demonstrates error handling capabilities. Set shouldError to true to trigger an error response, or leave it false/undefined for a successful response.",
-    summary: "Test error handling",
   })
   .input(
     z.object({

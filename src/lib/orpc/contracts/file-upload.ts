@@ -4,11 +4,11 @@ import { z } from "zod";
 // File upload contract
 
 export const fileUpload = oc
-  .route({ method: "POST", path: "/file-upload" })
-  .meta({
+  .route({
+    method: "POST",
+    path: "/file-upload",
     description:
       "Uploads a file to the server. Supports JPEG, PNG, GIF, and PDF files up to 5MB in size. Returns file metadata upon successful upload.",
-    summary: "Upload a file",
   })
   .input(
     z.object({

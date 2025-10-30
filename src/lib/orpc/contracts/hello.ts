@@ -4,11 +4,11 @@ import { z } from "zod";
 // Hello world contract
 
 export const hello = oc
-  .route({ method: "GET", path: "/hello" })
-  .meta({
+  .route({
+    method: "GET",
+    path: "/hello",
     description:
       "Returns a personalized greeting message with the current timestamp. If no name is provided, returns a generic 'Hello, World!' message.",
-    summary: "Get a greeting message",
   })
   .input(
     z.object({
