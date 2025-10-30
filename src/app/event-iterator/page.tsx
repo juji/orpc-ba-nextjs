@@ -11,16 +11,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient, typedClient } from "@/lib/orpc/client";
 
 interface EventData {
   message: string;
   timestamp: number;
   count: number;
+  isEnd?: boolean;
 }
 
 export default function EventIteratorPage() {
-  const [duration, setDuration] = useState("10");
+  const [duration, setDuration] = useState("3");
   const [isStreaming, setIsStreaming] = useState(false);
   const [events, setEvents] = useState<EventData[]>([]);
   const [error, setError] = useState<string>("");
@@ -35,16 +36,22 @@ export default function EventIteratorPage() {
     abortControllerRef.current = new AbortController();
 
     try {
-      const iterator = typedClient.eventIterator({
-        duration: parseInt(duration, 10),
+      const iteratorResult = await orpcClient.eventIterator({
+        duration: duration,
       });
 
-      for await (const event of iterator) {
+      for await (const event of iteratorResult) {
         if (abortControllerRef.current?.signal.aborted) {
           break;
         }
 
         setEvents((prev) => [...prev, event]);
+
+        // If this is the end event, stop streaming
+        if (event.isEnd) {
+          setIsStreaming(false);
+          break;
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -165,17 +172,37 @@ export default function EventIteratorPage() {
                   {events.map((event, _index) => (
                     <div
                       key={`${event.timestamp}-${event.count}`}
-                      className="p-3 border rounded-lg bg-muted/50"
+                      className={`p-3 border rounded-lg ${
+                        event.isEnd
+                          ? "bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800"
+                          : "bg-muted/50"
+                      }`}
                     >
                       <div className="flex justify-between items-start mb-2">
-                        <span className="font-medium text-sm">
-                          Event #{event.count}
+                        <span
+                          className={`font-medium text-sm ${
+                            event.isEnd
+                              ? "text-green-700 dark:text-green-300"
+                              : ""
+                          }`}
+                        >
+                          {event.isEnd
+                            ? "Stream Ended"
+                            : `Event #${event.count}`}
                         </span>
                         <span className="text-xs text-muted-foreground">
                           {new Date(event.timestamp).toLocaleTimeString()}
                         </span>
                       </div>
-                      <p className="text-sm">{event.message}</p>
+                      <p
+                        className={`text-sm ${
+                          event.isEnd
+                            ? "text-green-600 dark:text-green-400"
+                            : ""
+                        }`}
+                      >
+                        {event.message}
+                      </p>
                     </div>
                   ))}
                 </div>

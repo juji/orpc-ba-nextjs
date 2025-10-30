@@ -19,7 +19,13 @@ export const eventIterator = os.eventIterator.handler(async function* ({
       // Check if we've exceeded the duration
       const elapsed = (Date.now() - startTime) / 1000;
       if (elapsed >= duration) {
-        // Signal the end of the stream
+        // Yield final event to mark the end of the stream
+        yield {
+          message: `Stream completed after ${count} events`,
+          timestamp: Date.now(),
+          count,
+          isEnd: true,
+        };
         return;
       }
 
