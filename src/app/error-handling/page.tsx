@@ -23,6 +23,9 @@ export default function ErrorHandlingPage() {
     name: "",
   });
   const [formResult, setFormResult] = useState<string>("");
+  const [formResultType, setFormResultType] = useState<
+    "success" | "error" | null
+  >(null);
   const [formLoading, setFormLoading] = useState(false);
 
   const testErrorHandling = async () => {
@@ -43,16 +46,25 @@ export default function ErrorHandlingPage() {
     e.preventDefault();
     setFormLoading(true);
     setFormResult("");
+    setFormResultType(null);
 
     try {
       const response = await typedClient.formValidation({
         name: formData.name,
       });
       setFormResult(`Success: ${response.message}`);
-    } catch (error) {
-      setFormResult(
-        `Validation Error: ${error instanceof Error ? error.message : String(error)}`,
-      );
+      setFormResultType("success");
+    } catch (error: any) {
+      // Display the raw error.data as JSON
+      if (error.data) {
+        setFormResult(`${JSON.stringify(error.data, null, 2)}`);
+        setFormResultType("error");
+      } else {
+        setFormResult(
+          `Error: ${error instanceof Error ? error.message : String(error)}`,
+        );
+        setFormResultType("error");
+      }
     } finally {
       setFormLoading(false);
     }
@@ -133,8 +145,22 @@ export default function ErrorHandlingPage() {
                 <Button type="submit" disabled={formLoading}>
                   {formLoading ? "Validating..." : "Submit Form"}
                 </Button>
-                {formResult && (
-                  <p className="text-sm text-muted-foreground">{formResult}</p>
+                {formResult && formResultType && (
+                  <div className="text-sm">
+                    {formResultType === "success" ? (
+                      <div className="text-green-600 dark:text-green-400">
+                        <p className="mb-2 font-medium">✅ Success</p>
+                        <p>{formResult}</p>
+                      </div>
+                    ) : (
+                      <div className="text-red-600 dark:text-red-400">
+                        <p className="mb-2 font-medium">Error</p>
+                        <pre className="overflow-auto p-3 border border-red-200 dark:border-red-800 rounded bg-red-50 dark:bg-red-950/20 text-xs">
+                          {formResult}
+                        </pre>
+                      </div>
+                    )}
+                  </div>
                 )}
               </form>
             </CardContent>
