@@ -1,4 +1,5 @@
 import { errorHandling } from "./error-handling";
+import { eventIterator } from "./event-iterator";
 import { fileUpload } from "./file-upload";
 import { formValidation } from "./form-validation";
 import { hello } from "./hello";
@@ -14,4 +15,5 @@ export const orpcRouters = {
   errorHandling,
   formValidation,
   fileUpload,
+  eventIterator,
 };

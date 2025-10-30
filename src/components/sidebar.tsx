@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Activity,
   AlertTriangle,
   Calculator,
   Home,
@@ -47,6 +48,11 @@ const navigationItems = [
     name: "File Upload",
     href: "/file-upload",
     icon: Upload,
+  },
+  {
+    name: "Event Iterator",
+    href: "/event-iterator",
+    icon: Activity,
   },
 ];
 
