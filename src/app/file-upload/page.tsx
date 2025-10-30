@@ -43,7 +43,7 @@ export default function FileUploadPage() {
         file: selectedFile,
       });
       setResult(
-        `File uploaded successfully: ${response.fileName} (${(response.fileSize / 1024).toFixed(1)} KB)`,
+        `File uploaded successfully: ${response.fileName} (${(response.fileSize / 1024).toFixed(1)} KB, ${response.fileType})`,
       );
       setResultType("success");
     } catch (error: any) {
