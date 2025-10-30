@@ -7,6 +7,7 @@ import {
   LogIn,
   LogOut,
   MessageCircle,
+  Upload,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -41,6 +42,11 @@ const navigationItems = [
     name: "Error Handling",
     href: "/error-handling",
     icon: AlertTriangle,
+  },
+  {
+    name: "File Upload",
+    href: "/file-upload",
+    icon: Upload,
   },
 ];
 

@@ -1,4 +1,5 @@
 import { errorHandling } from "./error-handling";
+import { fileUpload } from "./file-upload";
 import { formValidation } from "./form-validation";
 import { hello } from "./hello";
 import { add, multiply } from "./math";
@@ -12,4 +13,5 @@ export const orpcContract = {
   shuffleEmail,
   errorHandling,
   formValidation,
+  fileUpload,
 };
