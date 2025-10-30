@@ -56,6 +56,15 @@ export default async function ServerActionPage({ searchParams }: PageProps) {
             Integrate oRPC procedures with React Server Actions. Submit forms
             directly to server functions with type-safe error handling.
           </p>
+          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            This implementation demonstrates progressive enhancement: with
+            JavaScript enabled, forms provide enhanced UX with client-side
+            validation, loading states, and immediate feedback without page
+            reloads. When JavaScript is disabled, forms gracefully degrade to
+            traditional server-side submissions with full page redirects,
+            ensuring accessibility and functionality across all devices and
+            network conditions.
+          </p>
         </div>
 
         <div className="space-y-6">
