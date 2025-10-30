@@ -31,6 +31,7 @@ export function ServerActionForm({
     email: initialEmail || "admin@example.com",
   });
   const [isEnhanced, setIsEnhanced] = useState(false);
+  const [clientSuccess, setClientSuccess] = useState(false);
 
   const {
     execute,
@@ -53,6 +54,7 @@ export function ServerActionForm({
     if (isEnhanced) {
       // Use client-side enhancement - prevent default form submission
       e.preventDefault();
+      setClientSuccess(false); // Reset previous success state
 
       const result = await execute({ email: formData.email });
 
@@ -62,6 +64,7 @@ export function ServerActionForm({
       } else {
         // Success
         console.log("Server action success:", result[1]);
+        setClientSuccess(true);
         setFormData({ email: "" });
       }
     }
@@ -70,6 +73,9 @@ export function ServerActionForm({
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    if (clientSuccess) {
+      setClientSuccess(false); // Clear success message when user starts typing
+    }
   };
 
   const displayError = isEnhanced ? clientError?.message : error;
@@ -124,6 +130,15 @@ export function ServerActionForm({
             </div>
           )}
         </form>
+
+        {clientSuccess && (
+          <div className="mt-4 p-4 bg-green-50 dark:bg-green-950 rounded-lg">
+            <p className="text-sm text-green-800 dark:text-green-200">
+              ✅ Successfully subscribed! Check the console for the server
+              response.
+            </p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
