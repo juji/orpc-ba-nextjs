@@ -85,7 +85,7 @@ async function handleRequest(
     context: {
       user: session?.user,
       session,
-    } as any, // Provide authenticated user context
+    } as Record<string, unknown>, // Provide authenticated user context
   });
 
   return response ?? new Response("Not found", { status: 404 });

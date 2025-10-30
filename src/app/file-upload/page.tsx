@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 export default function FileUploadPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -38,18 +38,20 @@ export default function FileUploadPage() {
     setResultType(null);
 
     try {
-      const response = await typedClient.fileUpload({
+      const response = await orpcClient.fileUpload({
         file: selectedFile,
       });
       setResult(
         `File uploaded successfully: ${response.fileName} (${(response.fileSize / 1024).toFixed(1)} KB, ${response.fileType})`,
       );
       setResultType("success");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("File upload error:", error);
 
-      if (error.data) {
-        setResult(`Upload Error: ${JSON.stringify(error.data, null, 2)}`);
+      if (error && typeof error === "object" && "data" in error) {
+        setResult(
+          `Upload Error: ${JSON.stringify((error as { data: unknown }).data, null, 2)}`,
+        );
         setResultType("error");
       } else {
         setResult(

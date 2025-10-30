@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { orpcClient, typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 interface EventData {
   message: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 export default function ShuffleEmail() {
   const [shuffledResult, setShuffledResult] = useState<string>("");
@@ -10,7 +10,7 @@ export default function ShuffleEmail() {
   const shuffleUserEmail = async () => {
     setLoading(true);
     try {
-      const result = await typedClient.shuffleEmail({});
+      const result = await orpcClient.shuffleEmail({});
       setShuffledResult(
         `Original: ${result.originalEmail}\nShuffled: ${result.shuffledEmail}`,
       );

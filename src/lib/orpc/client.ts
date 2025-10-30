@@ -25,6 +25,3 @@ const link = new OpenAPILink(orpcContract, {
 export const orpcClient: JsonifiedClient<
   ContractRouterClient<typeof orpcContract>
 > = createORPCClient(link);
-
-// Type assertion for backward compatibility
-export const typedClient = orpcClient as any;

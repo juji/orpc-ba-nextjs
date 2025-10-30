@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 export default function ErrorHandlingPage() {
   const [shouldError, setShouldError] = useState(true);
@@ -31,7 +31,7 @@ export default function ErrorHandlingPage() {
   const testErrorHandling = async () => {
     setLoading(true);
     try {
-      const response = await typedClient.errorHandling({ shouldError });
+      const response = await orpcClient.errorHandling({ shouldError });
       setResult(`Success: ${response.message}`);
     } catch (error) {
       setResult(
@@ -49,15 +49,17 @@ export default function ErrorHandlingPage() {
     setFormResultType(null);
 
     try {
-      const response = await typedClient.formValidation({
+      const response = await orpcClient.formValidation({
         name: formData.name,
       });
       setFormResult(`Success: ${response.message}`);
       setFormResultType("success");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Display the raw error.data as JSON
-      if (error.data) {
-        setFormResult(`${JSON.stringify(error.data, null, 2)}`);
+      if (error && typeof error === "object" && "data" in error) {
+        setFormResult(
+          `${JSON.stringify((error as { data: unknown }).data, null, 2)}`,
+        );
         setFormResultType("error");
       } else {
         setFormResult(

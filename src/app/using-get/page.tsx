@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 export default function UsingGetPage() {
   const [helloResult, setHelloResult] = useState<string>("");
@@ -21,7 +21,7 @@ export default function UsingGetPage() {
   const testHello = async () => {
     setLoading(true);
     try {
-      const result = await typedClient.hello({ name: name || undefined });
+      const result = await orpcClient.hello({ name: name || undefined });
       setHelloResult(
         `${result.message} (at ${result.timestamp.toLocaleString()})`,
       );

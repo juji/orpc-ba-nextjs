@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 export async function GET() {
   try {
     // Run a simple health check query
-    const result = await db.execute(sql`SELECT true as healthy`);
+    const _result = await db.execute(sql`SELECT true as healthy`);
 
     // Return success response
     return NextResponse.json({

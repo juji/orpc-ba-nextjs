@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 export default function BasicPage() {
   const [mathResult, setMathResult] = useState<number | null>(null);
@@ -29,7 +29,7 @@ export default function BasicPage() {
 
     setLoading(true);
     try {
-      const result = await typedClient.add({ a: numA, b: numB });
+      const result = await orpcClient.add({ a: numA, b: numB });
       setMathResult(result.result);
     } catch (error) {
       setMathResult(null);
@@ -49,7 +49,7 @@ export default function BasicPage() {
 
     setLoading(true);
     try {
-      const result = await typedClient.multiply({ a: numA, b: numB });
+      const result = await orpcClient.multiply({ a: numA, b: numB });
       setMathResult(result.result);
     } catch (error) {
       setMathResult(null);

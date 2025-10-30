@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { typedClient } from "@/lib/orpc/client";
+import { orpcClient } from "@/lib/orpc/client";
 
 export default function ORPCTest() {
   const [helloResult, setHelloResult] = useState<string>("");
@@ -24,7 +24,7 @@ export default function ORPCTest() {
   const testHello = async () => {
     setLoading(true);
     try {
-      const result = await typedClient.hello({ name: name || undefined });
+      const result = await orpcClient.hello({ name: name || undefined });
       setHelloResult(
         `${result.message} (at ${result.timestamp.toLocaleString()})`,
       );
@@ -38,14 +38,14 @@ export default function ORPCTest() {
   const testAdd = async () => {
     const numA = parseFloat(a);
     const numB = parseFloat(b);
-    if (isNaN(numA) || isNaN(numB)) {
+    if (Number.isNaN(numA) || Number.isNaN(numB)) {
       setMathResult(null);
       return;
     }
 
     setLoading(true);
     try {
-      const result = await typedClient.add({ a: numA, b: numB });
+      const result = await orpcClient.add({ a: numA, b: numB });
       setMathResult(result.result);
     } catch (error) {
       setMathResult(null);
@@ -58,14 +58,14 @@ export default function ORPCTest() {
   const testMultiply = async () => {
     const numA = parseFloat(a);
     const numB = parseFloat(b);
-    if (isNaN(numA) || isNaN(numB)) {
+    if (Number.isNaN(numA) || Number.isNaN(numB)) {
       setMathResult(null);
       return;
     }
 
     setLoading(true);
     try {
-      const result = await typedClient.multiply({ a: numA, b: numB });
+      const result = await orpcClient.multiply({ a: numA, b: numB });
       setMathResult(result.result);
     } catch (error) {
       setMathResult(null);

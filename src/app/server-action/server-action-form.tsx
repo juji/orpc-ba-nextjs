@@ -17,14 +17,12 @@ import { serverActionActionable as serverAction } from "@/lib/orpc/routers/serve
 interface ServerActionFormProps {
   action: (formData: FormData) => Promise<void>;
   initialEmail: string;
-  success: boolean;
   error: string | null;
 }
 
 export function ServerActionForm({
   action,
   initialEmail,
-  success,
   error,
 }: ServerActionFormProps) {
   const [formData, setFormData] = useState({
@@ -38,7 +36,7 @@ export function ServerActionForm({
 
   const {
     execute,
-    data,
+    data: _data,
     error: clientError,
     status,
   } = useServerAction(serverAction);
