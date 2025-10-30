@@ -32,6 +32,9 @@ export function ServerActionForm({
   });
   const [isEnhanced, setIsEnhanced] = useState(false);
   const [clientSuccess, setClientSuccess] = useState(false);
+  const [successData, setSuccessData] = useState<{ email: string } | null>(
+    null,
+  );
 
   const {
     execute,
@@ -55,6 +58,7 @@ export function ServerActionForm({
       // Use client-side enhancement - prevent default form submission
       e.preventDefault();
       setClientSuccess(false); // Reset previous success state
+      setSuccessData(null);
 
       const result = await execute({ email: formData.email });
 
@@ -65,6 +69,7 @@ export function ServerActionForm({
         // Success
         console.log("Server action success:", result[1]);
         setClientSuccess(true);
+        setSuccessData({ email: formData.email });
         setFormData({ email: "" });
       }
     }
@@ -74,72 +79,84 @@ export function ServerActionForm({
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (clientSuccess) {
-      setClientSuccess(false); // Clear success message when user starts typing
+      setClientSuccess(false);
+      setSuccessData(null);
     }
   };
 
   const displayError = isEnhanced ? clientError?.message : error;
 
   return (
-    <Card className="max-w-md">
-      <CardHeader>
-        <CardTitle>Subscribe to Newsletter</CardTitle>
-        <CardDescription>
-          Submit an email using oRPC Server Actions. Try using
-          "admin@example.com" to see error handling.
-          {isEnhanced && " (Enhanced with JavaScript)"}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form
-          action={action}
-          method="POST"
-          onSubmit={handleSubmit}
-          className="space-y-4"
-        >
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
-            {displayError && (
-              <p className="text-sm text-red-600 dark:text-red-400">
-                {displayError}
-              </p>
-            )}
-          </div>
-
-          <Button
-            type="submit"
-            disabled={status === "pending"}
-            className="w-full"
+    <>
+      <Card className="max-w-md">
+        <CardHeader>
+          <CardTitle>Subscribe to Newsletter</CardTitle>
+          <CardDescription>
+            Submit an email using oRPC Server Actions. Try using
+            "admin@example.com" to see error handling.
+            {isEnhanced && " (Enhanced with JavaScript)"}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form
+            action={action}
+            method="POST"
+            onSubmit={handleSubmit}
+            className="space-y-4"
           >
-            {status === "pending" ? "Subscribing..." : "Subscribe"}
-          </Button>
-
-          {displayError && (
-            <div className="text-sm text-red-600 dark:text-red-400">
-              <p className="mb-2 font-medium">Error</p>
-              <p>{displayError}</p>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
+              {displayError && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  {displayError}
+                </p>
+              )}
             </div>
-          )}
-        </form>
 
-        {clientSuccess && (
-          <div className="mt-4 p-4 bg-green-50 dark:bg-green-950 rounded-lg">
-            <p className="text-sm text-green-800 dark:text-green-200">
-              ✅ Successfully subscribed! Check the console for the server
-              response.
-            </p>
-          </div>
-        )}
-      </CardContent>
-    </Card>
+            <Button
+              type="submit"
+              disabled={status === "pending"}
+              className="w-full"
+            >
+              {status === "pending" ? "Subscribing..." : "Subscribe"}
+            </Button>
+
+            {displayError && (
+              <div className="text-sm text-red-600 dark:text-red-400">
+                <p className="mb-2 font-medium">Error</p>
+                <p>{displayError}</p>
+              </div>
+            )}
+          </form>
+        </CardContent>
+      </Card>
+
+      {clientSuccess && successData && (
+        <Card className="max-w-4xl">
+          <CardHeader>
+            <CardTitle>Successfully Subscribed</CardTitle>
+            <CardDescription>
+              The server action completed successfully and returned data.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg">
+              <pre className="text-sm text-green-800 dark:text-green-200">
+                {JSON.stringify({ ...successData, success: true }, null, 2)}
+              </pre>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </>
   );
 }
