@@ -122,7 +122,7 @@ export function Sidebar({ className }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed lg:sticky left-0 top-0 z-40 h-screen bg-background border-r border-border transition-all duration-300 ease-in-out",
+          "fixed lg:sticky left-0 top-0 z-40 h-screen bg-background/80 backdrop-blur-md border-r border-border/50 transition-all duration-300 ease-in-out",
           // Mobile styles
           "lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full",
@@ -136,7 +136,7 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex h-16 items-center justify-end lg:justify-start px-4 border-b border-border">
-            <h2 className="text-lg font-semibold">ORPC App</h2>
+            <h2 className="text-xl font-semibold">ORPC App</h2>
           </div>
 
           {/* Navigation */}
@@ -149,7 +149,7 @@ export function Sidebar({ className }: SidebarProps) {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                    "flex items-center gap-3 rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
                     isCurrent
                       ? "bg-accent text-accent-foreground"
                       : "text-muted-foreground",
@@ -160,7 +160,7 @@ export function Sidebar({ className }: SidebarProps) {
                     rel: "noopener noreferrer",
                   })}
                 >
-                  <Icon className="h-4 w-4 shrink-0" />
+                  <Icon className="h-5 w-5 shrink-0" />
                   <span className="truncate">{item.name}</span>
                 </Link>
               );
@@ -178,7 +178,7 @@ export function Sidebar({ className }: SidebarProps) {
                   size="sm"
                   className="w-full cursor-pointer"
                 >
-                  <LogOut className="h-4 w-4 mr-2" />
+                  <LogOut className="h-5 w-5 mr-2" />
                   Sign Out
                 </Button>
               ) : (
@@ -190,7 +190,7 @@ export function Sidebar({ className }: SidebarProps) {
                   size="sm"
                   className="w-full cursor-pointer"
                 >
-                  <LogIn className="h-4 w-4 mr-2" />
+                  <LogIn className="h-5 w-5 mr-2" />
                   Sign In
                 </Button>
               )}
@@ -202,7 +202,7 @@ export function Sidebar({ className }: SidebarProps) {
                 href="https://github.com/juji/orpc-ba-nextjs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-base text-muted-foreground hover:text-foreground transition-colors"
               >
                 Github
               </Link>
