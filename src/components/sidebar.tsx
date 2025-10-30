@@ -43,8 +43,6 @@ export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const { data: session } = useSession();
 
-  console.log("Sidebar session:", session);
-
   const handleSignOut = async () => {
     try {
       await authClient.signOut();
