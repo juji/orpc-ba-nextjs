@@ -162,7 +162,14 @@ export function Sidebar({ className }: SidebarProps) {
             </div>
 
             {/* Theme switcher */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-between mt-5">
+              <Link
+                href="https://github.com/juji/orpc-ba-nextjs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Github
+              </Link>
               <ThemeSwitcher />
             </div>
           </div>
