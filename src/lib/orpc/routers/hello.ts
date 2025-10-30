@@ -23,7 +23,7 @@ export const hello = os.hello.handler(({ input, context }) => {
     return {
       message,
       /* epoch timestamp */
-      timestamp: new Date(0, 0, 0, 0, 0, 0, 0),
+      timestamp: new Date("1970-01-01T00:00:00.000Z"),
     };
   }
 
