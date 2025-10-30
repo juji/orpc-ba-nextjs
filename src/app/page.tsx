@@ -34,7 +34,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
                 >
-                  ORPC (Open RPC)
+                  oRPC (OpenAPI Remote Procedure Call)
                 </a>
               </strong>{" "}
               is a modern, type-safe RPC (Remote Procedure Call) framework
