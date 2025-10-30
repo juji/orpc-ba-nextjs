@@ -136,7 +136,7 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex h-16 items-center justify-end lg:justify-start px-4 border-b border-border">
-            <h2 className="text-xl font-semibold text-slate-800 dark:text-foreground">
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-foreground">
               ORPC App
             </h2>
           </div>
@@ -154,7 +154,7 @@ export function Sidebar({ className }: SidebarProps) {
                     "flex items-center gap-3 rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
                     isCurrent
                       ? "bg-accent text-accent-foreground"
-                      : "text-slate-700 dark:text-muted-foreground",
+                      : "text-slate-800 dark:text-muted-foreground",
                   )}
                   onClick={() => setIsOpen(false)} // Close mobile menu on navigation
                   {...(item.external && {
@@ -204,7 +204,7 @@ export function Sidebar({ className }: SidebarProps) {
                 href="https://github.com/juji/orpc-ba-nextjs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base text-slate-700 dark:text-muted-foreground hover:text-slate-900 dark:hover:text-foreground transition-colors"
+                className="text-base text-slate-800 dark:text-muted-foreground hover:text-slate-900 dark:hover:text-foreground transition-colors"
               >
                 Github
               </Link>
