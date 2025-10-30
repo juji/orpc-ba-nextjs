@@ -1,13 +1,19 @@
 import { OpenAPIGenerator } from "@orpc/openapi";
 import { OpenAPIHandler } from "@orpc/openapi/fetch";
 import { onError } from "@orpc/server";
-import { ResponseHeadersPlugin } from "@orpc/server/plugins";
+import {
+  ResponseHeadersPlugin,
+  SimpleCsrfProtectionHandlerPlugin,
+} from "@orpc/server/plugins";
 import { ZodToJsonSchemaConverter } from "@orpc/zod";
 import { auth } from "@/lib/auth";
 import { orpcRouter } from "@/lib/orpc";
 
 const handler = new OpenAPIHandler(orpcRouter, {
-  plugins: [new ResponseHeadersPlugin()],
+  plugins: [
+    new ResponseHeadersPlugin(),
+    new SimpleCsrfProtectionHandlerPlugin(),
+  ],
   interceptors: [
     onError((error) => {
       console.error(error);
