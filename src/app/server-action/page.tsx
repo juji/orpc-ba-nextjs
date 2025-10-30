@@ -65,6 +65,12 @@ export default async function ServerActionPage({ searchParams }: PageProps) {
             ensuring accessibility and functionality across all devices and
             network conditions.
           </p>
+          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            Try disabling JavaScript in your browser's developer tools to see
+            how the form gracefully degrades to traditional server-side form
+            submission with full page redirects, while maintaining all
+            functionality and proper error handling.
+          </p>
         </div>
 
         <div className="space-y-6">
