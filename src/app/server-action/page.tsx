@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
   Card,
@@ -6,7 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { subscribeToNewsletter } from "@/lib/orpc/routers/server-action";
+import {
+  serverAction,
+  subscribeToNewsletter,
+} from "@/lib/orpc/routers/server-action";
 import { ServerActionForm } from "./server-action-form";
 
 // Create a server action that can be called directly from forms
@@ -18,14 +22,13 @@ async function subscribeAction(formData: FormData) {
   try {
     // Call the newsletter subscription logic directly
     const result = await subscribeToNewsletter(email);
-
-    // On success, redirect with success message
     redirect(`/server-action?success=true&email=${encodeURIComponent(email)}`);
   } catch (error) {
     // On error, redirect with error message
     const errorMessage =
       error instanceof Error ? error.message : "An error occurred";
-    console.log("Server action error:", errorMessage, error);
+    // Instead of redirect, let's try revalidatePath and redirect
+    revalidatePath("/server-action");
     redirect(
       `/server-action?error=${encodeURIComponent(errorMessage)}&email=${encodeURIComponent(email)}`,
     );
@@ -33,15 +36,15 @@ async function subscribeAction(formData: FormData) {
 }
 
 interface PageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default function ServerActionPage({ searchParams }: PageProps) {
-  const success = searchParams.success === "true";
+export default async function ServerActionPage({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const success = params.success === "true";
   const error =
-    typeof searchParams.error === "string" ? searchParams.error : null;
-  const email =
-    typeof searchParams.email === "string" ? searchParams.email : "";
+    typeof params.error === "string" ? decodeURIComponent(params.error) : null;
+  const email = typeof params.email === "string" ? params.email : "";
 
   return (
     <div className="flex min-h-screen items-center justify-center">
