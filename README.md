@@ -99,36 +99,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - `pnpm db:migrate` - Run database migrations
 - `pnpm lucidlines` - Run Lucidlines development tool
 
-## Project Structure
-
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── api/auth/[...all]/ # Better Auth API routes
-│   ├── basic/             # Math operations demo page
-│   ├── error-handling/    # Error handling demo page
-│   ├── event-iterator/    # Server-Sent Events demo page
-│   ├── file-upload/       # File upload demo page
-│   ├── server-action/     # Server actions demo page
-│   ├── using-get/         # GET method demo page
-│   └── rpc/[[...rest]]/   # ORPC API routes with documentation
-├── components/            # React components
-│   ├── auth.tsx          # Authentication component
-│   ├── shuffle-email.tsx # Email shuffling demo
-│   └── sidebar.tsx       # Glassmorphism navigation sidebar
-├── lib/
-│   ├── db/               # Database configuration and schemas
-│   ├── orpc/             # ORPC contracts, routers, and client
-│   │   ├── contracts/    # API procedure contracts with descriptions
-│   │   ├── routers/      # Procedure implementations
-│   │   └── client.ts     # Generated ORPC client
-│   └── stores/           # State management (auth store)
-└── stores/               # Additional stores
-```
-
 ## API Procedures
 
-The application demonstrates comprehensive ORPC procedures accessible via interactive documentation at `/rpc`:
+The application demonstrates ORPC procedures accessible via interactive documentation at `/rpc`:
 
 ### Public Procedures
 - `hello(name?: string)` - Returns a personalized greeting with timestamp (GET method, demonstrates caching)
@@ -144,7 +117,7 @@ The application demonstrates comprehensive ORPC procedures accessible via intera
 - `shuffleEmail()` - Shuffles characters in the authenticated user's email address
 
 ### API Documentation
-- **Interactive Docs**: Visit `/rpc` for comprehensive API documentation powered by Scalar
+- **Interactive Docs**: Visit `/rpc` for API documentation powered by Scalar
 - **OpenAPI Spec**: Available at `/rpc/spec.json` for integration with other tools
 - **Type Safety**: All procedures are fully typed with automatic client generation
 
