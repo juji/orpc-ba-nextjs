@@ -21,7 +21,7 @@ interface EventData {
 }
 
 export default function EventIteratorPage() {
-  const [duration, setDuration] = useState("3");
+  const [duration, setDuration] = useState("10");
   const [isStreaming, setIsStreaming] = useState(false);
   const [events, setEvents] = useState<EventData[]>([]);
   const [error, setError] = useState<string>("");
