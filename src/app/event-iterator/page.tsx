@@ -26,6 +26,20 @@ export default function EventIteratorPage() {
   const [events, setEvents] = useState<EventData[]>([]);
   const [error, setError] = useState<string>("");
   const abortControllerRef = useRef<AbortController | null>(null);
+  const eventsContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new events arrive
+  useEffect(() => {
+    if (eventsContainerRef.current && events.length > 0) {
+      const lastEventElement = eventsContainerRef.current.lastElementChild;
+      if (lastEventElement) {
+        lastEventElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  }, [events]);
 
   const startStreaming = async () => {
     if (isStreaming) return;
@@ -168,7 +182,10 @@ export default function EventIteratorPage() {
                     : "No events received yet. Click 'Start Streaming' to begin."}
                 </p>
               ) : (
-                <div className="space-y-2 max-h-96 overflow-y-auto">
+                <div
+                  className="space-y-2 max-h-64 overflow-y-auto"
+                  ref={eventsContainerRef}
+                >
                   {events.map((event, _index) => (
                     <div
                       key={`${event.timestamp}-${event.count}`}
