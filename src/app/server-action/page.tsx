@@ -43,8 +43,8 @@ export default async function ServerActionPage({ searchParams }: PageProps) {
   const email = typeof params.email === "string" ? params.email : "";
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="max-w-5xl px-4 py-8 lg:px-16 lg:py-32">
+    <div className="flex min-h-screen justify-center lg:justify-start">
+      <div className="max-w-5xl px-4 lg:px-16 py-32">
         <div className="flex flex-col gap-6 items-start text-left mb-10">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
             Server Action
