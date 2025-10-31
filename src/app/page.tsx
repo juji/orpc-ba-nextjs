@@ -7,10 +7,10 @@ export default function Home() {
       <div className="flex min-h-screen justify-center lg:justify-start">
         <div className="max-w-5xl px-4 lg:px-16 py-32">
           <div className="flex flex-col gap-6 items-start text-left mb-10">
-            <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+            <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
               Welcome to ORPC Test Application
             </h1>
-            <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            <p className="max-w-md text-lg leading-8">
               A modern Next.js application with authentication powered by Better
               Auth and Drizzle ORM.
             </p>
@@ -23,10 +23,8 @@ export default function Home() {
           </div>
 
           <div className="max-w-md mx-auto">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              What is ORPC?
-            </h2>
-            <div className="space-y-4 text-gray-700 dark:text-gray-300">
+            <h2 className="text-2xl font-semibold mb-4">What is ORPC?</h2>
+            <div className="space-y-4">
               <p className="text-lg leading-relaxed">
                 <strong>
                   <a
@@ -46,9 +44,7 @@ export default function Home() {
 
               <div className="grid md:grid-cols-1 gap-6 mt-6">
                 <div className="space-y-3">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    🚀 Key Features
-                  </h3>
+                  <h3 className="text-lg font-medium">🚀 Key Features</h3>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start">
                       <span className="text-green-500 mr-2">✓</span>
@@ -82,11 +78,9 @@ export default function Home() {
               </div>
 
               <div className="mt-6 p-4 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  <strong className="text-gray-900 dark:text-gray-100">
-                    Explore the Features:
-                  </strong>{" "}
-                  Try the interactive examples above, visit the{" "}
+                <p className="text-sm">
+                  <strong className="">Explore the Features:</strong> Try the
+                  interactive examples above, visit the{" "}
                   <a
                     href="/basic"
                     className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"

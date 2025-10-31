@@ -36,14 +36,14 @@ export default function UsingGetPage() {
     <div className="flex min-h-screen justify-center lg:justify-start">
       <div className="max-w-5xl px-4 lg:px-16 py-32">
         <div className="flex flex-col gap-6 items-start text-left mb-10">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
             Using GET Methods
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="max-w-md text-lg leading-8">
             Test the hello procedure. This procedure is configured to use GET
             method, while ORPC by default uses POST for all other requests.
           </p>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="max-w-md text-lg leading-8">
             GET requests are cacheable, which can improve performance for
             read-only operations. Check the network tab in the developer panel
             to see the request. Requests with empty name are cached.

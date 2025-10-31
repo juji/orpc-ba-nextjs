@@ -46,14 +46,14 @@ export default async function ServerActionPage({ searchParams }: PageProps) {
     <div className="flex min-h-screen justify-center lg:justify-start">
       <div className="max-w-5xl px-4 lg:px-16 py-32">
         <div className="flex flex-col gap-6 items-start text-left mb-10">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
             Server Action
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="max-w-md text-lg leading-8">
             Integrate oRPC procedures with React Server Actions. Submit forms
             directly to server functions with type-safe error handling.
           </p>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="max-w-md text-lg leading-8">
             This implementation demonstrates progressive enhancement: with
             JavaScript enabled, forms provide enhanced UX with client-side
             validation, loading states, and immediate feedback without page
@@ -62,7 +62,7 @@ export default async function ServerActionPage({ searchParams }: PageProps) {
             ensuring accessibility and functionality across all devices and
             network conditions.
           </p>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="max-w-md text-lg leading-8">
             Try disabling JavaScript in your browser's developer tools to see
             how the form gracefully degrades to traditional server-side form
             submission with full page redirects, while maintaining all

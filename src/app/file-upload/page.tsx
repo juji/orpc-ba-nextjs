@@ -68,10 +68,10 @@ export default function FileUploadPage() {
     <div className="flex min-h-screen justify-center lg:justify-start">
       <div className="max-w-5xl px-4 lg:px-16 py-32">
         <div className="flex flex-col gap-6 items-start text-left mb-10">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
             File Upload
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className="max-w-md text-lg leading-8">
             Test file upload functionality with ORPC. Upload images (JPEG, PNG,
             GIF) or PDF files up to 5MB.
           </p>
