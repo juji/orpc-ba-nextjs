@@ -31,7 +31,7 @@ export default function Home() {
                     href="https://orpc.unnoq.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline"
+                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
                   >
                     oRPC (OpenAPI Remote Procedure Call)
                   </a>
@@ -47,27 +47,27 @@ export default function Home() {
                   <h3 className="text-lg font-medium">🚀 Key Features</h3>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start">
-                      <span className="mr-2">✓</span>
+                      <span className="text-green-500 mr-2">✓</span>
                       <span>
                         <strong>Type Safety:</strong> End-to-end TypeScript
                         types
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="mr-2">✓</span>
+                      <span className="text-green-500 mr-2">✓</span>
                       <span>
                         <strong>Auto Documentation:</strong> OpenAPI/Scalar
                         integration
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="mr-2">✓</span>
+                      <span className="text-green-500 mr-2">✓</span>
                       <span>
                         <strong>Validation:</strong> Zod schema validation
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="mr-2">✓</span>
+                      <span className="text-green-500 mr-2">✓</span>
                       <span>
                         <strong>React Integration:</strong> Hooks and server
                         actions
@@ -81,11 +81,17 @@ export default function Home() {
                 <p className="text-sm">
                   <strong className="">Explore the Features:</strong> Try the
                   interactive examples above, visit the{" "}
-                  <a href="/basic" className="underline">
+                  <a
+                    href="/basic"
+                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                  >
                     Basic Operations
                   </a>{" "}
                   page, or check out the{" "}
-                  <a href="/rpc" className="underline">
+                  <a
+                    href="/rpc"
+                    className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                  >
                     API Documentation
                   </a>
                   .
