@@ -136,7 +136,9 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex h-16 items-center justify-end lg:justify-start px-4 border-b border-border">
-            <h2 className="text-xl font-semibold">ORPC App</h2>
+            <a href="/">
+              <h2 className="text-xl font-semibold">ORPC App</h2>
+            </a>
           </div>
 
           {/* Navigation */}
