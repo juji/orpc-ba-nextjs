@@ -11,6 +11,9 @@ export interface AuthContext {
 }
 
 // Authentication middleware - ensures user is authenticated
+// Need to create implementer for user contract with auth context
+// const os = implement(contracts).$context<AuthContext>();
+
 export const authenticated = async ({ context, next }: any) => {
   if (!context.user?.email) {
     throw new ORPCError("UNAUTHORIZED", {
