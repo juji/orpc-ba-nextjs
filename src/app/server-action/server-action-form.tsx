@@ -96,12 +96,7 @@ export function ServerActionForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form
-            action={action}
-            method="POST"
-            onSubmit={handleSubmit}
-            className="space-y-4"
-          >
+          <form action={action} onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
