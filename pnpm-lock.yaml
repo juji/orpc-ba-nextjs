@@ -115,8 +115,8 @@ importers:
         specifier: ^15.2.10
         version: 15.5.2
       lucidlines:
-        specifier: ^1.2.20
-        version: 1.2.20
+        specifier: ^1.2.21
+        version: 1.2.21
       tailwindcss:
         specifier: ^4
         version: 4.1.16
@@ -1464,8 +1464,8 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  lucidlines@1.2.20:
-    resolution: {integrity: sha512-pMst2OBdZ98GWM3MITI3ZYIs0unpk1Az8w5zt/6gRkkvu9LO4G9Man7KtAp6qaoY3o5pSuAalmQ3F0SMKSgkAQ==}
+  lucidlines@1.2.21:
+    resolution: {integrity: sha512-SgQLRjWvLuDAfROKhjM+9MPYN+S6fafakBW4qNronl4PDw2PsKr82rhPgwGaj9RyDYRejbP2/NZMbepl+bPkKw==}
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -2992,7 +2992,7 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  lucidlines@1.2.20:
+  lucidlines@1.2.21:
     dependencies:
       '@types/http-proxy': 1.17.17
       cp-dir: 1.0.3
