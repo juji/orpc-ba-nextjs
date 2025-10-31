@@ -1,6 +1,6 @@
 # ORPC Test Application
 
-A modern Next.js application demonstrating ORPC (OpenRPC) with Better Auth authentication and Drizzle ORM. This project showcases type-safe API procedures, authentication flows, and various HTTP methods.
+A modern Next.js application demonstrating ORPC (OpenRPC) with Better Auth authentication and Drizzle ORM. This project showcases type-safe API procedures, comprehensive API documentation, authentication flows, and various HTTP methods with a beautiful glassmorphism UI.
 
 ## Deployment
 
@@ -9,27 +9,37 @@ https://orpc-ba-nextjs.vercel.app/
 ## Features
 
 - **ORPC Integration**: Type-safe API procedures with automatic client generation
+- **Comprehensive API Documentation**: Interactive docs at `/rpc` with Scalar UI, including detailed descriptions for all endpoints
 - **Authentication**: Email/password authentication powered by Better Auth
 - **Database**: PostgreSQL with Drizzle ORM for type-safe database operations
 - **Demo Procedures**:
-  - Basic math operations (addition/multiplication)
   - Hello procedure with GET method (demonstrating caching)
+  - Basic math operations (addition/multiplication)
   - Email shuffling (authenticated procedure)
-- **Modern UI**: Responsive design with Tailwind CSS and dark mode support
+  - Error handling demonstrations
+  - File upload with validation (JPEG/PNG/GIF/PDF, 5MB max)
+  - Form validation with Zod schemas
+  - Server-Sent Events streaming
+  - Server actions for no-script form handling
+- **Modern UI**: Responsive design with Tailwind CSS, glassmorphism sidebar, gradient backgrounds, and dark mode support
 - **Mobile-First**: Sidebar navigation with smooth mobile animations
 - **Type Safety**: Full TypeScript coverage with Zod validation
 - **Developer Experience**: Biome linting, pre-commit hooks, and automated deployment
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 with App Router
-- **API**: ORPC (@orpc/server, @orpc/client, @orpc/contract)
-- **Authentication**: Better Auth
-- **Database**: PostgreSQL with Drizzle ORM
-- **Styling**: Tailwind CSS with Radix UI components
-- **Language**: TypeScript
-- **Linting**: Biome
+- **Framework**: Next.js 16 with App Router and Turbopack
+- **API**: ORPC (@orpc/server, @orpc/client, @orpc/contract, @orpc/openapi)
+- **API Documentation**: Scalar API Reference for interactive docs
+- **Authentication**: Better Auth with session management
+- **Database**: PostgreSQL with Drizzle ORM for type-safe operations
+- **Validation**: Zod schemas for runtime type checking
+- **Styling**: Tailwind CSS with Radix UI components and glassmorphism effects
+- **Language**: TypeScript with full type safety
+- **Linting & Formatting**: Biome
+- **Development Tools**: Lucidlines for process management
 - **Deployment**: Vercel with GitHub Actions CI/CD
+- **Pre-commit Hooks**: lefthook for code quality automation
 
 ## Getting Started
 
@@ -96,30 +106,47 @@ src/
 ├── app/                    # Next.js App Router pages
 │   ├── api/auth/[...all]/ # Better Auth API routes
 │   ├── basic/             # Math operations demo page
+│   ├── error-handling/    # Error handling demo page
+│   ├── event-iterator/    # Server-Sent Events demo page
+│   ├── file-upload/       # File upload demo page
+│   ├── server-action/     # Server actions demo page
 │   ├── using-get/         # GET method demo page
-│   └── rpc/[[...rest]]/   # ORPC API routes
+│   └── rpc/[[...rest]]/   # ORPC API routes with documentation
 ├── components/            # React components
 │   ├── auth.tsx          # Authentication component
 │   ├── shuffle-email.tsx # Email shuffling demo
-│   └── sidebar.tsx       # Navigation sidebar
+│   └── sidebar.tsx       # Glassmorphism navigation sidebar
 ├── lib/
 │   ├── db/               # Database configuration and schemas
 │   ├── orpc/             # ORPC contracts, routers, and client
+│   │   ├── contracts/    # API procedure contracts with descriptions
+│   │   ├── routers/      # Procedure implementations
+│   │   └── client.ts     # Generated ORPC client
 │   └── stores/           # State management (auth store)
 └── stores/               # Additional stores
 ```
 
 ## API Procedures
 
-The application demonstrates several ORPC procedures:
+The application demonstrates comprehensive ORPC procedures accessible via interactive documentation at `/rpc`:
 
 ### Public Procedures
-- `hello(name?: string)` - Returns a greeting with timestamp (GET method)
-- `add(a: number, b: number)` - Adds two numbers
-- `multiply(a: number, b: number)` - Multiplies two numbers
+- `hello(name?: string)` - Returns a personalized greeting with timestamp (GET method, demonstrates caching)
+- `add(a: number, b: number)` - Adds two numbers and returns the sum
+- `multiply(a: number, b: number)` - Multiplies two numbers and returns the product
+- `errorHandling(shouldError?: boolean)` - Demonstrates error handling capabilities
+- `formValidation(name: string)` - Validates form data with Zod schema constraints
+- `fileUpload(file: File)` - Uploads files with validation (JPEG/PNG/GIF/PDF, 5MB max)
+- `eventIterator(duration?: string)` - Streams real-time events using Server-Sent Events
+- `serverAction(email: string)` - Demonstrates server-side form processing
 
 ### Authenticated Procedures
-- `shuffleEmail()` - Shuffles characters in the authenticated user's email
+- `shuffleEmail()` - Shuffles characters in the authenticated user's email address
+
+### API Documentation
+- **Interactive Docs**: Visit `/rpc` for comprehensive API documentation powered by Scalar
+- **OpenAPI Spec**: Available at `/rpc/spec.json` for integration with other tools
+- **Type Safety**: All procedures are fully typed with automatic client generation
 
 ## Authentication
 
