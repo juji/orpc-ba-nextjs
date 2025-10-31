@@ -1,4 +1,4 @@
-import { implement } from "@orpc/server";
+import { implement, ORPCError } from "@orpc/server";
 import { contracts } from "../contracts/server-action";
 
 // Create implementer for server action contract
@@ -11,7 +11,9 @@ async function subscribeToNewsletter(email: string) {
 
   // Simulate potential error
   if (email === "admin@example.com") {
-    throw new Error("A user with this email already exists");
+    throw new ORPCError("CONFLICT", {
+      message: "A user with this email already exists",
+    });
   }
 
   return {

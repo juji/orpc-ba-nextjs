@@ -30,6 +30,7 @@ export function ServerActionForm({
   });
   const [isEnhanced, setIsEnhanced] = useState(false);
   const [clientSuccess, setClientSuccess] = useState(false);
+  const [unexpectedError, setUnexpectedError] = useState<string | null>(null);
   const [successData, setSuccessData] = useState<{ email: string } | null>(
     null,
   );
@@ -57,18 +58,28 @@ export function ServerActionForm({
       e.preventDefault();
       setClientSuccess(false); // Reset previous success state
       setSuccessData(null);
+      setUnexpectedError(null); // Clear any previous unexpected errors
 
-      const result = await execute({ email: formData.email });
+      try {
+        const result = await execute({ email: formData.email });
 
-      if (result[0]) {
-        // Error occurred
-        console.error("Server action error:", result[0]);
-      } else {
-        // Success
-        console.log("Server action success:", result[1]);
-        setClientSuccess(true);
-        setSuccessData({ email: formData.email });
-        setFormData({ email: "" });
+        if (result[0]) {
+          // Error occurred
+          console.error("Server action error:", result[0]);
+        } else {
+          // Success
+          console.log("Server action success:", result[1]);
+          setClientSuccess(true);
+          setSuccessData({ email: formData.email });
+          setFormData({ email: "" });
+        }
+      } catch (error) {
+        console.error("Unexpected error in handleSubmit:", error);
+        setUnexpectedError(
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred",
+        );
       }
     }
     // When not enhanced, let the form submit normally to the action prop
@@ -80,9 +91,10 @@ export function ServerActionForm({
       setClientSuccess(false);
       setSuccessData(null);
     }
+    setUnexpectedError(null); // Clear unexpected errors when user starts typing
   };
 
-  const displayError = error || clientError?.message;
+  const displayError = error || clientError?.message || unexpectedError;
 
   return (
     <>
