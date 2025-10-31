@@ -39,7 +39,7 @@ https://orpc-ba-nextjs.vercel.app/
 - **Linting & Formatting**: Biome
 - **Development Tools**: Lucidlines for process management
 - **Deployment**: Vercel with GitHub Actions CI/CD
-- **Pre-commit Hooks**: lefthook for code quality automation
+- **Pre-commit Hooks**: Husky with lint-staged for code quality automation
 
 ## Getting Started
 
@@ -168,7 +168,7 @@ The application uses PostgreSQL with Drizzle ORM:
 ### Code Quality
 - **Biome**: Linting and formatting
 - **TypeScript**: Full type safety
-- **Pre-commit hooks**: Automated code quality checks with lefthook
+- **Pre-commit hooks**: Automated code quality checks with Husky and lint-staged
 
 ## Deployment
 
