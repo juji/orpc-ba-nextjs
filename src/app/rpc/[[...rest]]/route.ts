@@ -34,12 +34,15 @@ async function handleRequest(
 
   // Serve OpenAPI spec at /rpc/spec.json
   if (restArray.length === 1 && restArray[0] === "spec.json") {
+    const url = new URL(request.url);
+    const baseUrl = `${url.origin}/rpc`;
+
     const spec = await openAPIGenerator.generate(orpcRouter, {
       info: {
         title: "ORPC Test Application",
         version: "1.0.0",
       },
-      servers: [{ url: "/rpc" }],
+      servers: [{ url: baseUrl }],
     });
 
     return new Response(JSON.stringify(spec), {
