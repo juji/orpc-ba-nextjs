@@ -4,7 +4,8 @@ A modern Next.js application demonstrating ORPC (OpenRPC) with Better Auth authe
 
 ## Deployment
 
-https://orpc-ba-nextjs.vercel.app/
+https://orpc.jujiplay.com/
+
 
 ## Features
 

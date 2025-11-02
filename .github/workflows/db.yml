@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Send HTTP Request to Keep Supabase Alive
         run: |
-          curl --fail --show-error --silent "https://orpc-ba-nextjs.vercel.app/api/health"
+          curl --fail --show-error --silent "https://orpc.jujiplay.com/api/health"
